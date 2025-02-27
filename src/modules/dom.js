@@ -1,4 +1,5 @@
 const projectContainer = document.querySelector('.projects');
+const projectForm = document.querySelector('.project-form');
 
 function createProjectElement(project) {
   const projectElement = document.createElement('li');
@@ -7,12 +8,15 @@ function createProjectElement(project) {
 }
 
 function renderProjects(projectArr) {
+  projectContainer.replaceChildren();
+
   projectArr.forEach((project) => {
     const projectElement = createProjectElement(project);
     projectContainer.append(projectElement);
   });
 }
 
-export default{
+export default {
+  projectForm,
   renderProjects
 }
