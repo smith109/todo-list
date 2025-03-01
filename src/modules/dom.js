@@ -20,6 +20,7 @@ function renderProjects(projectArr) {
 }
 
 export default {
+  projectContainer,
   projectForm,
   renderProjects
 }
