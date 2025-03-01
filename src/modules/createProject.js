@@ -1,6 +1,8 @@
 const createProject = (name = 'Inbox') => {
+  const id = crypto.randomUUID();
   const todos = [];
 
+  const getId = () => id;
   const getName = () => name;
   const getTodos = () => [...todos];
 
@@ -13,11 +15,18 @@ const createProject = (name = 'Inbox') => {
     todos.splice(index, 1);
   }
 
-  function findTodo(title) {
-    return todos.find((todo) => todo.getTitle() === title);
+  function findTodo(id) {
+    return todos.find((todo) => todo.Id() === id);
   }
 
-  return { getName, getTodos, addTodo, removeTodo, findTodo };
+  return {
+    getId,
+    getName,
+    getTodos,
+    addTodo,
+    removeTodo,
+    findTodo
+  };
 }
 
 export default createProject;
