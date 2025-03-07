@@ -1,5 +1,9 @@
 const projectContainer = document.querySelector('.projects');
 const todoContainer = document.querySelector('.todos');
+const projectModal = document.querySelector('.project-modal');
+
+const openProjectModal = () => projectModal.showModal();
+const closeProjectModal = () => projectModal.close();
 
 function createProjectElement(project) {
   const projectElement = document.createElement('li');
@@ -57,5 +61,7 @@ function renderTodos(todoArr) {
 
 export default {
   renderProjects,
-  renderTodos
+  renderTodos,
+  openProjectModal,
+  closeProjectModal
 }
