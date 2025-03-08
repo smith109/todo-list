@@ -1,6 +1,8 @@
 const createProject = (name = 'Inbox') => {
+  const id = crypto.randomUUID();
   const todos = [];
 
+  const getId = () => id;
   const getName = () => name;
   const getTodos = () => [...todos];
 
@@ -13,7 +15,13 @@ const createProject = (name = 'Inbox') => {
     todos.splice(index, 1);
   }
 
-  return { getName, getTodos, addTodo, removeTodo };
+  return {
+    getId,
+    getName,
+    getTodos,
+    addTodo,
+    removeTodo
+  };
 }
 
 export default createProject;
