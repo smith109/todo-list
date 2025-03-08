@@ -17,10 +17,15 @@ function removeProject(project) {
   projects.splice(index, 1);
 }
 
+function findProject(id) {
+  return projects.find((project) => project.getId() === id);
+}
+
 export default {
   getProjects,
   getActiveProject,
   setActiveProject,
   addProject,
-  removeProject
+  removeProject,
+  findProject
 }
