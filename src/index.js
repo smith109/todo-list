@@ -4,9 +4,11 @@ import dom from "./modules/dom";
 
 const addProjectBtn = document.querySelector('.add-project-btn');
 const projectForm = document.querySelector('.project-form');
+const projectCancelBtn = document.querySelector('.project-form .cancel-btn');
 
 addProjectBtn.addEventListener('click', dom.openProjectModal);
 projectForm.addEventListener('submit', submitProjectForm);
+projectCancelBtn.addEventListener('click', closeProjectForm);
 
 function submitProjectForm(e) {
   e.preventDefault();
@@ -19,4 +21,9 @@ function submitProjectForm(e) {
   projectForm.reset();
   dom.closeProjectModal();
   dom.renderProjects(projectManager.getProjects());
+}
+
+function closeProjectForm() {
+  projectForm.reset();
+  dom.closeProjectModal();
 }
