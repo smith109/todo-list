@@ -15,6 +15,8 @@ function createProjectElement(project) {
 }
 
 function renderProjects(projectArr) {
+  projectContainer.replaceChildren();
+
   projectArr.forEach((project) => {
     const projectElement = createProjectElement(project);
     projectContainer.append(projectElement);
