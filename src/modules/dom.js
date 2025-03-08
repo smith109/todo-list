@@ -11,6 +11,7 @@ const closeTodoModal = () => todoModal.close();
 function createProjectElement(project) {
   const projectElement = document.createElement('li');
   projectElement.textContent = project.getName();
+  projectElement.dataset.id = project.getId();
   return projectElement;
 }
 
