@@ -60,6 +60,8 @@ function createTodoElement(todo) {
 }
 
 function renderTodos(todoArr) {
+  todoContainer.replaceChildren();
+
   todoArr.forEach((todo) => {
     const todoElement = createTodoElement(todo);
     todoContainer.append(todoElement);
