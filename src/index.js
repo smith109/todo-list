@@ -35,4 +35,5 @@ function changeActiveProject(e) {
   const id = e.target.dataset.id;
   
   projectManager.setActiveProject(projectManager.findProject(id));
+  dom.updateProjectName(projectManager.getActiveProject());
 }
