@@ -2,6 +2,7 @@ const projectContainer = document.querySelector('.projects');
 const todoContainer = document.querySelector('.todos');
 const projectModal = document.querySelector('.project-modal');
 const todoModal = document.querySelector('.todo-modal');
+const projectNameElement = document.querySelector('.project-name');
 
 const openProjectModal = () => projectModal.showModal();
 const closeProjectModal = () => projectModal.close();
@@ -65,11 +66,16 @@ function renderTodos(todoArr) {
   });
 }
 
+function updateProjectName(project) {
+  projectNameElement.textContent = project.getName();
+}
+
 export default {
-  renderProjects,
-  renderTodos,
   openProjectModal,
   closeProjectModal,
   openTodoModal,
-  closeTodoModal
+  closeTodoModal,
+  renderProjects,
+  renderTodos,
+  updateProjectName
 }
