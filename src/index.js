@@ -2,6 +2,7 @@ import projectManager from "./modules/projectManager";
 import createProject from "./modules/createProject";
 import createTodo from "./modules/createTodo";
 import dom from "./modules/dom";
+import './style.css';
 
 const addProjectBtn = document.querySelector('.add-project-btn');
 const projectCancelBtn = document.querySelector('.project-form .cancel-btn');
