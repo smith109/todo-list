@@ -1,0 +1,24 @@
+:root {
+  --clr-main-bg: #f4f4f4;
+  --clr-neutral-dk: #333333;
+  --ff-base: Inter, Roboto, 'Helvetica Neue',
+    'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  background: var(--clr-main-bg);
+  color: var(--clr-neutral-dk);
+  font-family: var(--ff-base);
+  line-height: 1.5;
+}
