@@ -1,5 +1,7 @@
 :root {
   --clr-main-bg: #f4f4f4;
+  --clr-sidebar-bg: #444444;
+  --clr-neutral-lt: #fafafa;
   --clr-neutral-dk: #333333;
   --ff-base: Inter, Roboto, 'Helvetica Neue',
     'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
@@ -21,4 +23,15 @@ body {
   color: var(--clr-neutral-dk);
   font-family: var(--ff-base);
   line-height: 1.5;
+}
+
+div.container {
+  display: grid;
+  min-height: 100dvh;
+  grid-template-columns: 1fr 4fr;
+}
+
+.container>.sidebar {
+  background: var(--clr-sidebar-bg);
+  color: var(--clr-neutral-lt);
 }
