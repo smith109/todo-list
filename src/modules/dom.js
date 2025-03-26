@@ -1,4 +1,7 @@
+import { de } from "date-fns/locale";
+
 const projectContainer = document.querySelector('.project-container');
+const todoContainer = document.querySelector('.todo-container');
 
 function createProjectElement(project) {
   const projectElement = document.createElement('li');
@@ -71,6 +74,29 @@ function createDetailsDiv(todo) {
   return detailsDiv;
 }
 
+function createTodoElement(todo) {
+  const todoElement = document.createElement('div');
+  const headerElement = createTodoHeader(todo);
+  const priorityElement = createPriorityDiv(todo);
+  const detailsElement = createDetailsDiv(todo);
+
+  todoElement.dataset.id = todo.getId();
+  todoElement.classList.add('todo-card');
+  todoElement.append(headerElement, priorityElement, detailsElement);
+
+  return todoElement;
+}
+
+function renderTodos(todoArr) {
+  todoContainer.replaceChildren();
+
+  todoArr.forEach((todo) => {
+    const todoElement = createTodoElement(todo);
+    todoContainer.append(todoElement);
+  });
+}
+
 export default {
-  renderProjects
+  renderProjects,
+  renderTodos
 }
