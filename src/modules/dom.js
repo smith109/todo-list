@@ -51,6 +51,26 @@ function createPriorityDiv(todo) {
   return priorityDiv;
 }
 
+function createDetailsDiv(todo) {
+  const detailsDiv = document.createElement('div');
+  const todoDescriptionPara = document.createElement('p');
+  const btnContainerDiv = document.createElement('div');
+  const editTodoBtn = document.createElement('button');
+  const deleteTodoBtn = document.createElement('button');
+
+  detailsDiv.classList.add('details');
+
+  todoDescriptionPara.textContent =
+    todo.getDescription() ? todo.getDescription() : 'No description provided.';
+  editTodoBtn.textContent = 'Edit';
+  deleteTodoBtn.textContent = 'Delete';
+
+  btnContainerDiv.append(editTodoBtn, deleteTodoBtn);
+  detailsDiv.append(todoDescriptionPara, btnContainerDiv);
+
+  return detailsDiv;
+}
+
 export default {
   renderProjects
 }
