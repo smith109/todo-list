@@ -40,6 +40,17 @@ function createTodoHeader(todo) {
   return todoHeader;
 }
 
+function createPriorityDiv(todo) {
+  const priorityDiv = document.createElement('div');
+  const todoPriority = todo.getPriority();
+
+  priorityDiv.classList.add(`${todoPriority}-priority`);
+  priorityDiv.textContent =
+    `${todoPriority[0].toUpperCase() + todoPriority.slice(1)} Priority`;
+
+  return priorityDiv;
+}
+
 export default {
   renderProjects
 }
