@@ -1,7 +1,9 @@
-import { de } from "date-fns/locale";
-
 const projectContainer = document.querySelector('.project-container');
 const todoContainer = document.querySelector('.todo-container');
+const projectModal = document.querySelector('.project-modal');
+
+const openProjectModal = () => projectModal.showModal();
+const closeProjectModal = () => projectModal.close();
 
 function createProjectElement(project) {
   const projectElement = document.createElement('li');
@@ -97,6 +99,8 @@ function renderTodos(todoArr) {
 }
 
 export default {
+  openProjectModal,
+  closeProjectModal,
   renderProjects,
   renderTodos
 }
