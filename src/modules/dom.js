@@ -40,14 +40,26 @@ function createTodoHeader(todo) {
   return todoHeader;
 }
 
+function createPriorityText(todo) {
+  const priorityText = document.createElement('div');
+  const todoPriority = todo.getPriority();
+
+  priorityText.classList.add(`${todoPriority}-priority-text`);
+  priorityText.textContent =
+    `${todoPriority[0].toUpperCase() + todoPriority.slice(1)} Priority`;
+
+  return priorityText;
+}
+
 function createTodoElement(todo) {
   const todoElement = document.createElement('div');
   const todoHeader = createTodoHeader(todo);
+  const priorityText = createPriorityText(todo);
 
   todoElement.dataset.id = todo.getId();
   todoElement.classList.add('todo-card');
 
-  todoElement.append(todoHeader);
+  todoElement.append(todoHeader, priorityText);
   return todoElement;
 }
 
