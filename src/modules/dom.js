@@ -22,11 +22,32 @@ function renderProjects(projectArr) {
   });
 }
 
+function createTodoHeader(todo) {
+  const todoHeader = document.createElement('div');
+  const checkboxLabel = document.createElement('label');
+  const checkboxInput = document.createElement('input');
+  const todoTitleH3 = document.createElement('h3');
+  const dueDateSpan = document.createElement('span');
+
+  todoHeader.classList.add('header');
+  checkboxInput.type = 'checkbox';
+
+  todoTitleH3.textContent = todo.getTitle();
+  dueDateSpan.textContent = todo.getDueDate();
+
+  checkboxLabel.append(checkboxInput);
+  todoHeader.append(checkboxLabel, todoTitleH3, dueDateSpan);
+  return todoHeader;
+}
+
 function createTodoElement(todo) {
   const todoElement = document.createElement('div');
+  const todoHeader = createTodoHeader(todo);
 
   todoElement.dataset.id = todo.getId();
   todoElement.classList.add('todo-card');
+
+  todoElement.append(todoHeader);
   return todoElement;
 }
 
