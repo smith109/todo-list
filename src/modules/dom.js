@@ -1,4 +1,5 @@
 const projectContainer = document.querySelector('.project-container');
+const todoContainer = document.querySelector('.todo-container');
 
 function createProjectElement(project) {
   const projectElement = document.createElement('li');
@@ -21,6 +22,24 @@ function renderProjects(projectArr) {
   });
 }
 
+function createTodoElement(todo) {
+  const todoElement = document.createElement('div');
+
+  todoElement.dataset.id = todo.getId();
+  todoElement.classList.add('todo-card');
+  return todoElement;
+}
+
+function renderTodos(todoArr) {
+  todoContainer.replaceChildren();
+
+  todoArr.forEach((todo) => {
+    const todoElement = createTodoElement(todo);
+    todoContainer.append(todoElement);
+  });
+}
+
 export default {
-  renderProjects
+  renderProjects,
+  renderTodos
 }
