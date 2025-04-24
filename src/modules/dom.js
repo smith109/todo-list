@@ -51,15 +51,36 @@ function createPriorityText(todo) {
   return priorityText;
 }
 
+function createTodoDetails(todo) {
+  const todoDetails = document.createElement('div');
+  const descriptionPara = document.createElement('p');
+  const todoFooter = document.createElement('div');
+  const editTodoBtn = document.createElement('button');
+  const deleteTodoBtn = document.createElement('button');
+
+  todoDetails.classList.add('todo-details');
+  todoFooter.classList.add('footer');
+
+  descriptionPara.textContent =
+    todo.getDescription() || 'No description provided.';
+  editTodoBtn.textContent = 'Edit';
+  deleteTodoBtn.textContent = 'Delete';
+
+  todoFooter.append(editTodoBtn, deleteTodoBtn);
+  todoDetails.append(descriptionPara, todoFooter);
+  return todoDetails;
+}
+
 function createTodoElement(todo) {
   const todoElement = document.createElement('div');
   const todoHeader = createTodoHeader(todo);
   const priorityText = createPriorityText(todo);
+  const todoDetails = createTodoDetails(todo);
 
   todoElement.dataset.id = todo.getId();
   todoElement.classList.add('todo-card');
 
-  todoElement.append(todoHeader, priorityText);
+  todoElement.append(todoHeader, priorityText, todoDetails);
   return todoElement;
 }
 
