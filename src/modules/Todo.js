@@ -6,6 +6,7 @@ export default class Todo {
   #dueDate;
   #priority;
   #done = false;
+  #id = crypto.randomUUID();
 
   constructor(title, description, dueDate, priority) {
     this.#title = title;
@@ -32,6 +33,10 @@ export default class Todo {
 
   get done() {
     return this.#done;
+  }
+
+  get id() {
+    return this.#id;
   }
 
   toggle() {
