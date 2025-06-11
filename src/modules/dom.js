@@ -15,10 +15,31 @@ function renderProjects(projectArr) {
   });
 }
 
+function createTodoHeader(todo) {
+  const todoHeader = document.createElement('div');
+  const checkboxLabel = document.createElement('label');
+  const checkboxInput = document.createElement('input');
+  const todoTitle = document.createElement('h3');
+  const todoDueDate = document.createElement('span');
+
+  todoHeader.classList.add('header');
+  checkboxInput.type = 'checkbox';
+  todoTitle.textContent = todo.title;
+  todoDueDate.textContent = todo.dueDate;
+
+  checkboxLabel.append(checkboxInput);
+  todoHeader.append(checkboxLabel, todoTitle, todoDueDate);
+  return todoHeader;
+}
+
 function createTodoElement(todo) {
   const todoElement = document.createElement('div');
+  const header = createTodoHeader(todo);
+
   todoElement.classList.add('todo-card');
   todoElement.dataset.id = todo.id;
+
+  todoElement.append(header);
   return todoElement;
 }
 
