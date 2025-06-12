@@ -39,15 +39,34 @@ function createPriorityDiv(todo) {
   return priorityDiv;
 }
 
+function createTodoDetails(todo) {
+  const todoDetails = document.createElement('div');
+  const todoDescription = document.createElement('p');
+  const btnContainer = document.createElement('div');
+  const editTodoBtn = document.createElement('button');
+  const deleteTodoBtn = document.createElement('button');
+
+  todoDetails.classList.add('todo-details');
+  btnContainer.classList.add('btn-container');
+  todoDescription.textContent = todo.description || 'No description provided.';
+  editTodoBtn.textContent = 'Edit';
+  deleteTodoBtn.textContent = 'Delete';
+
+  btnContainer.append(editTodoBtn, deleteTodoBtn);
+  todoDetails.append(todoDescription, btnContainer);
+  return todoDetails;
+}
+
 function createTodoElement(todo) {
   const todoElement = document.createElement('div');
   const header = createTodoHeader(todo);
   const priorityDiv = createPriorityDiv(todo);
+  const todoDetails = createTodoDetails(todo);
 
   todoElement.classList.add('todo-card');
   todoElement.dataset.id = todo.id;
 
-  todoElement.append(header, priorityDiv);
+  todoElement.append(header, priorityDiv, todoDetails);
   return todoElement;
 }
 
