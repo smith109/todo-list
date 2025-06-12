@@ -32,14 +32,22 @@ function createTodoHeader(todo) {
   return todoHeader;
 }
 
+function createPriorityDiv(todo) {
+  const priorityDiv = document.createElement('div');
+  priorityDiv.classList.add(`${todo.priority}-priority-text`);
+  priorityDiv.textContent = todo.priority;
+  return priorityDiv;
+}
+
 function createTodoElement(todo) {
   const todoElement = document.createElement('div');
   const header = createTodoHeader(todo);
+  const priorityDiv = createPriorityDiv(todo);
 
   todoElement.classList.add('todo-card');
   todoElement.dataset.id = todo.id;
 
-  todoElement.append(header);
+  todoElement.append(header, priorityDiv);
   return todoElement;
 }
 
