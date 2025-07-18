@@ -1,5 +1,6 @@
 const activeProjectName = document.querySelector('.active-project-name');
 const projectContainer = document.querySelector('.project-container');
+const todoContainer = document.querySelector('.todo-container');
 
 const renderActiveProjectName = (activeProject) => {
   activeProjectName.textContent = activeProject.name;
@@ -72,7 +73,29 @@ const createTodoDetails = (todo) => {
   return todoDetails;
 }
 
+const createTodoElement = (todo) => {
+  const todoElement = document.createElement('div');
+  const header = createTodoHeader(todo);
+  const details = createTodoDetails(todo);
+
+  todoElement.dataset.id = todo.getId();
+  todoElement.classList.add('todo-card');
+
+  todoElement.append(header, details);
+  return todoElement;
+}
+
+const renderTodos = (todoArr) => {
+  todoContainer.replaceChildren();
+
+  todoArr.forEach((todo) => {
+    const todoElement = createTodoElement(todo);
+    todoContainer.append(todoElement);
+  });
+}
+
 export default {
   renderActiveProjectName,
   renderProjects,
+  renderTodos
 }
