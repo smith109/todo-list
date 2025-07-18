@@ -52,6 +52,26 @@ const createTodoHeader = (todo) => {
   return header;
 }
 
+const createTodoDetails = (todo) => {
+  const todoDetails = document.createElement('div');
+  const descriptionPara = document.createElement('p');
+  const btnContainer = document.createElement('div');
+  const editBtn = document.createElement('button');
+  const deleteBtn = document.createElement('button');
+
+  todoDetails.classList.add('details', 'hidden');
+  editBtn.classList.add('edit-todo-btn');
+  deleteBtn.classList.add('delete-todo-btn');
+
+  descriptionPara.textContent = todo.description || 'No description provided.';
+  editBtn.textContent = 'Edit';
+  deleteBtn.textContent = 'Delete';
+
+  btnContainer.append(editBtn, deleteBtn);
+  todoDetails.append(descriptionPara, btnContainer);
+  return todoDetails;
+}
+
 export default {
   renderActiveProjectName,
   renderProjects,
