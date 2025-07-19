@@ -28,5 +28,16 @@ const showDialogElement = (e) => {
   }
 }
 
+function closeDialogElement(e) {
+  if (!e.target.classList.contains('cancel-btn')) return;
+  const dialog = e.target.closest('dialog');
+  const form = e.target.closest('form');
+
+  dialog.close();
+  form.reset();
+}
+
 addProjectBtn.addEventListener('click', showDialogElement);
+projectModal.addEventListener('click', closeDialogElement);
 addTodoBtn.addEventListener('click', showDialogElement);
+todoModal.addEventListener('click', closeDialogElement);
