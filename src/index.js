@@ -1,8 +1,10 @@
 import projectManager from './modules/projectManager';
+import Project from './modules/Project';
 import dom from './modules/dom';
 
 const addProjectBtn = document.querySelector('.add-project-btn');
 const projectModal = document.querySelector('.project-modal');
+const projectForm = document.querySelector('.project-form');
 const addTodoBtn = document.querySelector('.add-todo-btn');
 const todoModal = document.querySelector('.todo-modal');
 
@@ -37,7 +39,19 @@ function closeDialogElement(e) {
   form.reset();
 }
 
+const submitProjectForm = () => {
+  const projectName = projectForm['project-name'].value.trim();
+
+  if (projectName !== '') {
+    projectManager.addProject(new Project(projectName));
+    updateDisplay();
+  }
+
+  projectForm.reset();
+}
+
 addProjectBtn.addEventListener('click', showDialogElement);
 projectModal.addEventListener('click', closeDialogElement);
+projectForm.addEventListener('submit', submitProjectForm);
 addTodoBtn.addEventListener('click', showDialogElement);
 todoModal.addEventListener('click', closeDialogElement);
