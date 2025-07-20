@@ -22,11 +22,17 @@ const updateDisplay = () => {
 }
 
 const showDialogElement = (e) => {
-  if (e.target.classList.contains('add-project-btn')) {
-    projectModal.showModal();
+  const modalButtons = {
+    'add-project-btn': () => projectModal.showModal(),
+    'add-todo-btn': () => todoModal.showModal(),
   }
-  if (e.target.classList.contains('add-todo-btn')) {
-    todoModal.showModal();
+
+  const targetClassList = e.target.classList;
+
+  for (const className in modalButtons) {
+    if (targetClassList.contains(className)) {
+      modalButtons[className]();
+    }
   }
 }
 
