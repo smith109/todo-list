@@ -1,5 +1,6 @@
 :root {
   --clr-main-bg: #f4f4f4;
+  --clr-neutral-lt: #edf4f2;
   --clr-neutral-dk: #333333;
   --ff-base: Inter, Roboto, 'Helvetica Neue',
     'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
@@ -30,5 +31,22 @@ div.container {
 }
 
 .container>.header {
+  padding: 0.65rem;
   grid-column: span 2;
+  color: var(--clr-neutral-lt);
+  background: var(--clr-neutral-dk);
+}
+
+.header>h1::before {
+  width: 55px;
+  height: 55px;
+  display: block;
+  content: url('./assets/checkbox.svg');
+}
+
+.header h1 {
+  gap: 8px;
+  display: flex;
+  font-size: 2.5rem;
+  align-items: center;
 }
