@@ -43,7 +43,8 @@ const submitProjectForm = () => {
   const projectName = projectForm['project-name'].value.trim();
 
   if (projectName !== '') {
-    projectManager.addProject(new Project(projectName));
+    const project = new Project(projectName);
+    projectManager.addProject(project);
     updateDisplay();
   }
 
