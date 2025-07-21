@@ -1,7 +1,10 @@
 :root {
+  --clr-accent: #007BFF;
   --clr-main-bg: #f4f4f4;
+  --clr-sidebar-bg: #444444;
   --clr-neutral-lt: #edf4f2;
   --clr-neutral-dk: #333333;
+  --clr-accent-hover: #3995f7;
   --ff-base: Inter, Roboto, 'Helvetica Neue',
     'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
 }
@@ -22,6 +25,36 @@ body {
   color: var(--clr-neutral-dk);
   background: var(--clr-main-bg);
   -webkit-font-smoothing: antialiased;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+input,
+button,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+button.add-project-btn,
+button.add-todo-btn {
+  padding: 0.5rem 1rem;
+  color: var(--clr-neutral-lt);
+  background: var(--clr-accent);
+}
+
+button.add-project-btn:hover,
+button.add-todo-btn:hover {
+  background: var(--clr-accent-hover);
 }
 
 div.container {
@@ -49,4 +82,51 @@ div.container {
   display: flex;
   font-size: 2.5rem;
   align-items: center;
+}
+
+.container>.sidebar {
+  padding: 1.5rem;
+  max-width: 280px;
+  color: var(--clr-neutral-lt);
+  background: var(--clr-sidebar-bg);
+}
+
+.sidebar>h2 {
+  font-size: 1.7rem;
+  margin-bottom: 0.8rem;
+}
+
+.sidebar>.add-project-btn {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.sidebar li {
+  display: flex;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+}
+
+.sidebar li.active {
+  font-weight: 600;
+  background: var(--clr-neutral-dk);
+  border-left: 3px solid var(--clr-accent);
+}
+
+.sidebar li:hover {
+  background: #ffffff1a;
+}
+
+.sidebar li>button::before {
+  content: "\2715";
+}
+
+.sidebar li>button {
+  opacity: .8;
+  color: inherit;
+  background: none;
 }
