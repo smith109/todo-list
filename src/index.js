@@ -1,7 +1,9 @@
 import projectManager from './modules/projectManager';
 import Project from './modules/Project';
 import dom from './modules/dom';
+import './styles.css';
 
+const projectContainer = document.querySelector('.project-container');
 const addProjectBtn = document.querySelector('.add-project-btn');
 const projectModal = document.querySelector('.project-modal');
 const projectForm = document.querySelector('.project-form');
@@ -19,6 +21,17 @@ const updateDisplay = () => {
   }
 
   dom.renderProjects(projects);
+}
+
+const removeProject = (selectedProject) => {
+  const activeProject = projectManager.getActiveProject();
+  const isActive = (selectedProject === activeProject);
+
+  projectManager.removeProject(selectedProject);
+
+  if (isActive) {
+    projectManager.resetActiveProject();
+  }
 }
 
 const showDialogElement = (e) => {
@@ -57,6 +70,19 @@ const submitProjectForm = () => {
   projectForm.reset();
 }
 
+const handleProjectClick = (e) => {
+  if (e.target.tagName === 'UL') return;
+  const projectId = e.target.closest('[data-id]').dataset.id;
+  const selectedProject = projectManager.findProjectById(projectId);
+
+  if (e.target.tagName === 'BUTTON') {
+    removeProject(selectedProject);
+  }
+  
+  updateDisplay();
+}
+
+projectContainer.addEventListener('click', handleProjectClick);
 addProjectBtn.addEventListener('click', showDialogElement);
 projectModal.addEventListener('click', closeDialogElement);
 projectForm.addEventListener('submit', submitProjectForm);
