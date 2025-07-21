@@ -14,13 +14,13 @@ const updateDisplay = () => {
   const projects = projectManager.getProjects();
   const activeProject = projectManager.getActiveProject();
 
+  dom.renderProjects(projects);
+  dom.renderActiveProjectName(activeProject);
+
   if (activeProject) {
     const todos = activeProject.getTodos();
-    dom.renderActiveProjectName(activeProject);
     dom.renderTodos(todos);
   }
-
-  dom.renderProjects(projects);
 }
 
 const removeProject = (selectedProject) => {
@@ -78,7 +78,7 @@ const handleProjectClick = (e) => {
   if (e.target.tagName === 'BUTTON') {
     removeProject(selectedProject);
   }
-  
+
   updateDisplay();
 }
 
