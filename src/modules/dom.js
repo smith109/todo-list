@@ -3,7 +3,11 @@ const projectContainer = document.querySelector('.project-container');
 const todoContainer = document.querySelector('.todo-container');
 
 const renderActiveProjectName = (activeProject) => {
-  activeProjectName.textContent = activeProject.name;
+  if (activeProject) {
+    activeProjectName.textContent = activeProject.name;
+  } else {
+    activeProjectName.textContent = 'Todos';
+  }
 }
 
 const createProjectElement = (project) => {
