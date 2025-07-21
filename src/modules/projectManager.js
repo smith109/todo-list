@@ -8,6 +8,10 @@ const setActiveProject = (project) => {
   activeProject = project;
 }
 
+const resetActiveProject = () => {
+  activeProject = projects[0] || null;
+}
+
 const addProject = (project) => {
   projects.push(project);
 }
@@ -25,6 +29,7 @@ export default {
   getProjects,
   getActiveProject,
   setActiveProject,
+  resetActiveProject,
   addProject,
   removeProject,
   findProjectById
