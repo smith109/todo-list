@@ -1,10 +1,9 @@
 :root {
-  --clr-accent: #007BFF;
+  --clr-accent: #3498db;
   --clr-main-bg: #f4f4f4;
   --clr-sidebar-bg: #444444;
   --clr-neutral-lt: #edf4f2;
   --clr-neutral-dk: #333333;
-  --clr-accent-hover: #3995f7;
   --ff-base: Inter, Roboto, 'Helvetica Neue',
     'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
 }
@@ -40,9 +39,14 @@ textarea {
 
 button {
   border: none;
+  outline: none;
   cursor: pointer;
   font-weight: 600;
   border-radius: 5px;
+}
+
+button:hover {
+  opacity: .9;
 }
 
 button.add-project-btn,
@@ -50,11 +54,6 @@ button.add-todo-btn {
   padding: 0.5rem 1rem;
   color: var(--clr-neutral-lt);
   background: var(--clr-accent);
-}
-
-button.add-project-btn:hover,
-button.add-todo-btn:hover {
-  background: var(--clr-accent-hover);
 }
 
 div.container {
@@ -106,9 +105,9 @@ div.container {
   padding: 0.5rem;
   cursor: pointer;
   font-size: 1.2rem;
+  border-radius: 5px;
   align-items: center;
   justify-content: space-between;
-  border-radius: 5px;
 }
 
 .sidebar li.active {
