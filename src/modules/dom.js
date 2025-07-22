@@ -10,6 +10,18 @@ const renderActiveProjectName = (activeProject) => {
   }
 }
 
+const highlightActiveProject = (activeProject) => {
+  const id = activeProject.getId();
+  const currentActiveElement = document.querySelector('.active');
+  const newActiveElement = document.querySelector(`[data-id='${id}']`);
+
+  if (currentActiveElement) {
+    currentActiveElement.classList.remove('active');
+  }
+
+  newActiveElement.classList.add('active');
+}
+
 const createProjectElement = (project) => {
   const projectElement = document.createElement('li');
   const projectNameSpan = document.createElement('span');
@@ -100,6 +112,7 @@ const renderTodos = (todoArr) => {
 
 export default {
   renderActiveProjectName,
+  highlightActiveProject,
   renderProjects,
   renderTodos
 }
