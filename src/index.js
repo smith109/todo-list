@@ -20,6 +20,7 @@ const updateDisplay = () => {
   if (activeProject) {
     const todos = activeProject.getTodos();
     dom.renderTodos(todos);
+    dom.highlightActiveProject(activeProject);
   }
 }
 
