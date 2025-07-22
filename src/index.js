@@ -77,6 +77,8 @@ const handleProjectClick = (e) => {
 
   if (e.target.tagName === 'BUTTON') {
     removeProject(selectedProject);
+  } else {
+    projectManager.setActiveProject(selectedProject);
   }
 
   updateDisplay();
