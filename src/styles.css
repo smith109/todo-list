@@ -47,6 +47,7 @@ button {
 
 button:hover {
   opacity: .9;
+  transform: scale(1.02);
 }
 
 button.add-project-btn,
@@ -128,4 +129,20 @@ div.container {
   opacity: .8;
   color: inherit;
   background: none;
+}
+
+.container>.main {
+  padding: 1.5rem;
+}
+
+.main>.header {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main .active-project-name {
+  font-size: 1.7rem;
 }
