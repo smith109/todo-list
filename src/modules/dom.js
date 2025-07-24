@@ -22,6 +22,25 @@ const highlightActiveProject = (activeProject) => {
   newActiveElement.classList.add('active');
 }
 
+const hideAllTodoDetails = () => {
+  const allTodoDetails = document.querySelectorAll('.details');
+
+  allTodoDetails.forEach((element) => {
+    element.classList.add('hidden');
+  });
+}
+
+const toggleTodoDetails = (todoId) => {
+  const todoDetails = document.querySelector(`[data-id='${todoId}'] .details`);
+  const isHidden = todoDetails.classList.contains('hidden');
+
+  hideAllTodoDetails();
+
+  if (isHidden) {
+    todoDetails.classList.remove('hidden');
+  }
+}
+
 const createProjectElement = (project) => {
   const projectElement = document.createElement('li');
   const projectNameSpan = document.createElement('span');
@@ -113,6 +132,7 @@ const renderTodos = (todoArr) => {
 export default {
   renderActiveProjectName,
   highlightActiveProject,
+  toggleTodoDetails,
   renderProjects,
   renderTodos
-}
+};
