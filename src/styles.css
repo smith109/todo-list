@@ -1,6 +1,8 @@
 :root {
   --clr-accent: #3498db;
   --clr-main-bg: #f4f4f4;
+  --clr-edit-btn: #FFB300;
+  --clr-delete-btn: #f02323;
   --clr-sidebar-bg: #444444;
   --clr-neutral-lt: #edf4f2;
   --clr-neutral-ltr: #ffffff;
@@ -50,6 +52,7 @@ button {
   cursor: pointer;
   font-weight: 600;
   border-radius: 5px;
+  color: var(--clr-neutral-lt);
 }
 
 button:hover {
@@ -60,7 +63,6 @@ button:hover {
 button.add-project-btn,
 button.add-todo-btn {
   padding: 0.5rem;
-  color: var(--clr-neutral-lt);
   background: var(--clr-accent);
 }
 
@@ -176,13 +178,13 @@ div.container {
 .todo-card label>input[type='checkbox'] {
   display: grid;
   font: inherit;
-  width: 1.15em;
-  height: 1.15em;
+  width: 1.25em;
+  height: 1.25em;
   cursor: pointer;
   appearance: none;
   border-radius: 50%;
   color: currentColor;
-  margin-top: 0.25rem;
+  margin-top: 0.35rem;
   place-content: center;
   transform: translateY(-0.075em);
   border: 0.15em solid currentColor;
@@ -246,7 +248,36 @@ label>input[type='checkbox']:focus {
 }
 
 .todo-summary+span {
-  color: #454545;
+  font-weight: 500;
+  color: #777777;
   font-size: 1.1rem;
   font-style: italic;
+}
+
+.todo-card .details {
+  display: flex;
+}
+
+.todo-card .details>p {
+  flex: 1;
+  padding: 0.6rem;
+}
+
+button.edit-todo-btn,
+button.delete-todo-btn {
+  width: 4rem;
+  padding: 0.3rem 0.4rem;
+}
+
+.details .edit-todo-btn {
+  background: var(--clr-edit-btn);
+}
+
+.details .delete-todo-btn {
+  margin-left: 0.5rem;
+  background: var(--clr-delete-btn);
+}
+
+.todo-card .details.hidden {
+  display: none;
 }
