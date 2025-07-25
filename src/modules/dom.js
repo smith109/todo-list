@@ -72,6 +72,7 @@ const createTodoHeader = (todo) => {
   const dueDateSpan = document.createElement('span');
 
   header.classList.add('header');
+  checkboxInput.classList.add('todo-checkbox');
   todoSummaryDiv.classList.add('todo-summary');
   prioritySpan.classList.add(`${todo.priority}-priority-text`);
 
