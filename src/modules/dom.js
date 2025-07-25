@@ -30,6 +30,17 @@ const hideAllTodoDetails = () => {
   });
 }
 
+const toggleTodoDoneClass = (todoId, todo) => {
+  const todoElement = document.querySelector(`[data-id='${todoId}']`);
+  const isDone = todo.isDone();
+
+  if (isDone) {
+    todoElement.classList.add('done');
+  } else {
+    todoElement.classList.remove('done');
+  }
+}
+
 const toggleTodoDetails = (todoId) => {
   const todoDetails = document.querySelector(`[data-id='${todoId}'] .details`);
   const isHidden = todoDetails.classList.contains('hidden');
@@ -133,6 +144,7 @@ const renderTodos = (todoArr) => {
 export default {
   renderActiveProjectName,
   highlightActiveProject,
+  toggleTodoDoneClass,
   toggleTodoDetails,
   renderProjects,
   renderTodos
