@@ -22,6 +22,11 @@ const highlightActiveProject = (activeProject) => {
   newActiveElement.classList.add('active');
 }
 
+const findMatchingClassKey = (event, validClasses) => {
+  return Object.keys(validClasses)
+    .find((className) => event.target.classList.contains(className));
+}
+
 const hideAllTodoDetails = () => {
   const allTodoDetails = document.querySelectorAll('.details');
 
@@ -144,6 +149,7 @@ const renderTodos = (todoArr) => {
 export default {
   renderActiveProjectName,
   highlightActiveProject,
+  findMatchingClassKey,
   toggleTodoDoneClass,
   toggleTodoDetails,
   renderProjects,
