@@ -107,7 +107,8 @@ const createTodoHeader = (todo) => {
 
   titleH3.textContent = todo.title;
   prioritySpan.textContent = `${todo.priority} Priority`;
-  dueDateSpan.textContent = todo.dueDate ? `Due: ${todo.dueDate}` : '';
+  dueDateSpan.textContent = todo.dueDate ? 
+  `Due: ${format(todo.dueDate, 'MMM do, yyy')}` : '';
 
   checkboxLabel.append(checkboxInput);
   todoSummaryDiv.append(titleH3, prioritySpan);
