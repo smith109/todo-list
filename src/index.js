@@ -33,12 +33,10 @@ const showDialogElement = (e) => {
     'add-todo-btn': () => todoModal.showModal(),
   }
 
-  const targetClassList = e.target.classList;
+  const matchingClassKey = dom.findMatchingClassKey(e, modalButtons);
 
-  for (const className in modalButtons) {
-    if (targetClassList.contains(className)) {
-      modalButtons[className]();
-    }
+  if (matchingClassKey) {
+    modalButtons[matchingClassKey]();
   }
 }
 
@@ -112,18 +110,17 @@ const handleTodoClick = (e) => {
   if (e.target.classList.contains('todo-container')) return;
   const todoCard = e.target.closest('.todo-card');
   const todoId = todoCard.dataset.id;
-  const targetClassList = e.target.classList;
 
   const todoCardTargets = {
     'todo-checkbox': () => toggleTodoDone(todoId),
   }
 
-  for (const className in todoCardTargets) {
-    if (targetClassList.contains(className)) {
-      todoCardTargets[className]();
-    } else {
-      dom.toggleTodoDetails(todoId);
-    }
+  const matchingClassKey = dom.findMatchingClassKey(e, todoCardTargets);
+
+  if (matchingClassKey) {
+    todoCardTargets[matchingClassKey]();
+  } else {
+    dom.toggleTodoDetails(todoId);
   }
 }
 
