@@ -8,6 +8,7 @@ const projectContainer = document.querySelector('.project-container');
 const addProjectBtn = document.querySelector('.add-project-btn');
 const projectModal = document.querySelector('.project-modal');
 const projectForm = document.querySelector('.project-form');
+const todoContainer = document.querySelector('.todo-container');
 const addTodoBtn = document.querySelector('.add-todo-btn');
 const todoModal = document.querySelector('.todo-modal');
 const todoForm = document.querySelector('.todo-form');
@@ -108,10 +109,19 @@ const handleProjectClick = (e) => {
   updateDisplay();
 }
 
+const handleTodoClick = (e) => {
+  if (e.target.classList.contains('todo-container')) return;
+  const todoCard = e.target.closest('.todo-card');
+  const todoId = todoCard.dataset.id;
+
+  dom.toggleTodoDetails(todoId);
+}
+
 projectContainer.addEventListener('click', handleProjectClick);
 addProjectBtn.addEventListener('click', showDialogElement);
 projectModal.addEventListener('click', closeDialogElement);
 projectForm.addEventListener('submit', submitProjectForm);
+todoContainer.addEventListener('click', handleTodoClick);
 addTodoBtn.addEventListener('click', showDialogElement);
 todoModal.addEventListener('click', closeDialogElement);
 todoForm.addEventListener('submit', submitTodoForm);
