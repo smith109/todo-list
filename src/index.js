@@ -27,17 +27,6 @@ const updateDisplay = () => {
   }
 }
 
-const removeProject = (selectedProject) => {
-  const activeProject = projectManager.getActiveProject();
-  const isActive = (selectedProject === activeProject);
-
-  projectManager.removeProject(selectedProject);
-
-  if (isActive) {
-    projectManager.resetActiveProject();
-  }
-}
-
 const showDialogElement = (e) => {
   const modalButtons = {
     'add-project-btn': () => projectModal.showModal(),
@@ -51,15 +40,6 @@ const showDialogElement = (e) => {
       modalButtons[className]();
     }
   }
-}
-
-function closeDialogElement(e) {
-  if (!e.target.classList.contains('cancel-btn')) return;
-  const dialog = e.target.closest('dialog');
-  const form = e.target.closest('form');
-
-  dialog.close();
-  form.reset();
 }
 
 const submitProjectForm = () => {
@@ -95,6 +75,17 @@ const submitTodoForm = () => {
   todoForm.reset();
 }
 
+const removeProject = (selectedProject) => {
+  const activeProject = projectManager.getActiveProject();
+  const isActive = (selectedProject === activeProject);
+
+  projectManager.removeProject(selectedProject);
+
+  if (isActive) {
+    projectManager.resetActiveProject();
+  }
+}
+
 const handleProjectClick = (e) => {
   if (e.target.tagName === 'UL') return;
   const projectId = e.target.closest('[data-id]').dataset.id;
@@ -109,12 +100,40 @@ const handleProjectClick = (e) => {
   updateDisplay();
 }
 
+const toggleTodoDone = (todoId) => {
+  const activeProject = projectManager.getActiveProject();
+  const todo = activeProject.findTodoById(todoId);
+
+  todo.toggleDone();
+  dom.toggleTodoDoneClass(todoId, todo);
+}
+
 const handleTodoClick = (e) => {
   if (e.target.classList.contains('todo-container')) return;
   const todoCard = e.target.closest('.todo-card');
   const todoId = todoCard.dataset.id;
+  const targetClassList = e.target.classList;
 
-  dom.toggleTodoDetails(todoId);
+  const todoCardTargets = {
+    'todo-checkbox': () => toggleTodoDone(todoId),
+  }
+
+  for (const className in todoCardTargets) {
+    if (targetClassList.contains(className)) {
+      todoCardTargets[className]();
+    } else {
+      dom.toggleTodoDetails(todoId);
+    }
+  }
+}
+
+function closeDialogElement(e) {
+  if (!e.target.classList.contains('cancel-btn')) return;
+  const dialog = e.target.closest('dialog');
+  const form = e.target.closest('form');
+
+  dialog.close();
+  form.reset();
 }
 
 projectContainer.addEventListener('click', handleProjectClick);
