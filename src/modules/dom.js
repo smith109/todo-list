@@ -1,6 +1,9 @@
+import { format } from 'date-fns';
+
 const activeProjectName = document.querySelector('.active-project-name');
 const projectContainer = document.querySelector('.project-container');
 const todoContainer = document.querySelector('.todo-container');
+const todoForm = document.querySelector('.todo-form');
 
 const renderActiveProjectName = (activeProject) => {
   if (activeProject) {
@@ -27,14 +30,6 @@ const findMatchingClassKey = (event, validClasses) => {
     .find((className) => event.target.classList.contains(className));
 }
 
-const hideAllTodoDetails = () => {
-  const allTodoDetails = document.querySelectorAll('.details');
-
-  allTodoDetails.forEach((element) => {
-    element.classList.add('hidden');
-  });
-}
-
 const toggleTodoDoneClass = (todoId, todo) => {
   const todoElement = document.querySelector(`[data-id='${todoId}']`);
   const isDone = todo.isDone();
@@ -46,6 +41,14 @@ const toggleTodoDoneClass = (todoId, todo) => {
   }
 }
 
+const hideAllTodoDetails = () => {
+  const allTodoDetails = document.querySelectorAll('.details');
+
+  allTodoDetails.forEach((element) => {
+    element.classList.add('hidden');
+  });
+}
+
 const toggleTodoDetails = (todoId) => {
   const todoDetails = document.querySelector(`[data-id='${todoId}'] .details`);
   const isHidden = todoDetails.classList.contains('hidden');
@@ -55,6 +58,13 @@ const toggleTodoDetails = (todoId) => {
   if (isHidden) {
     todoDetails.classList.remove('hidden');
   }
+}
+
+const populateTodoForm = (todo) => {
+  todoForm['todo-title'].value = todo.title;
+  todoForm['todo-description'].value = todo.description;
+  todoForm['todo-due-date'].value = format(todo.dueDate, 'yyyy-MM-dd');
+  todoForm['todo-priority'].value = todo.priority;
 }
 
 const createProjectElement = (project) => {
@@ -152,6 +162,7 @@ export default {
   findMatchingClassKey,
   toggleTodoDoneClass,
   toggleTodoDetails,
+  populateTodoForm,
   renderProjects,
   renderTodos
 };
