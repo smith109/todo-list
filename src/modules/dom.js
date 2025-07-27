@@ -41,6 +41,10 @@ const toggleTodoDoneClass = (todoId, todo) => {
   }
 }
 
+const setHiddenTodoInput = (todoId) => {
+  todoForm['todoId'].value = todoId;
+}
+
 const hideAllTodoDetails = () => {
   const allTodoDetails = document.querySelectorAll('.details');
 
@@ -162,6 +166,7 @@ export default {
   highlightActiveProject,
   findMatchingClassKey,
   toggleTodoDoneClass,
+  setHiddenTodoInput,
   toggleTodoDetails,
   populateTodoForm,
   renderProjects,
