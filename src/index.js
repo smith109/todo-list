@@ -139,6 +139,13 @@ const editTodoDetails = (e, todoId) => {
   showDialogElement(e);
 }
 
+const deleteTodo = (todoId) => {
+  const activeProject = projectManager.getActiveProject();
+
+  activeProject.removeTodo(todoId);
+  updateDisplay();
+}
+
 const handleTodoClick = (e) => {
   if (e.target.classList.contains('todo-container')) return;
   const todoCard = e.target.closest('.todo-card');
@@ -147,6 +154,7 @@ const handleTodoClick = (e) => {
   const todoCardTargets = {
     'todo-checkbox': () => toggleTodoDone(todoId),
     'edit-todo-btn': () => editTodoDetails(e, todoId),
+    'delete-todo-btn': () => deleteTodo(todoId),
   }
 
   const matchingClassKey = dom.findMatchingClassKey(e, todoCardTargets);
