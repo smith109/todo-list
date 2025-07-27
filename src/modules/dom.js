@@ -30,6 +30,11 @@ const findMatchingClassKey = (event, validClasses) => {
     .find((className) => event.target.classList.contains(className));
 }
 
+const renderTodoFormTitle = (newTitle) => {
+  const todoFormH2 = document.querySelector('.todo-form h2');
+  todoFormH2.textContent = newTitle;
+}
+
 const toggleTodoDoneClass = (todoId, todo) => {
   const todoElement = document.querySelector(`[data-id='${todoId}']`);
   const isDone = todo.isDone();
@@ -165,6 +170,7 @@ export default {
   renderActiveProjectName,
   highlightActiveProject,
   findMatchingClassKey,
+  renderTodoFormTitle,
   toggleTodoDoneClass,
   setHiddenTodoInput,
   toggleTodoDetails,
