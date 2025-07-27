@@ -30,7 +30,16 @@ const updateDisplay = () => {
 const showDialogElement = (e) => {
   const modalButtons = {
     'add-project-btn': () => projectModal.showModal(),
-    'add-todo-btn': () => todoModal.showModal(),
+
+    'add-todo-btn': () => {
+      dom.renderTodoFormTitle('Add New Todo');
+      todoModal.showModal();
+    },
+
+    'edit-todo-btn': () => {
+      dom.renderTodoFormTitle('Edit Todo');
+      todoModal.showModal();
+    }
   }
 
   const matchingClassKey = dom.findMatchingClassKey(e, modalButtons);
@@ -53,10 +62,6 @@ const submitProjectForm = () => {
 }
 
 const submitTodoForm = () => {
-  const todoTitle = todoForm['todo-title'].value.trim();
-  const todoDescription = todoForm['todo-description'].value.trim();
-  const todoDueDate = todoForm['todo-due-date'].value;
-  const todoPriority = todoForm['todo-priority'].value;
   const activeProject = projectManager.getActiveProject();
 
   if (!activeProject) {
@@ -64,12 +69,31 @@ const submitTodoForm = () => {
     return;
   }
 
-  if (todoTitle !== '') {
+  const todoTitle = todoForm['todo-title'].value.trim();
+  const todoDescription = todoForm['todo-description'].value.trim();
+  const todoDueDate = todoForm['todo-due-date'].value;
+  const todoPriority = todoForm['todo-priority'].value;
+
+  if (todoTitle === '') return
+
+  const editingId = todoForm['todoId'].value;
+
+  if (editingId !== '') {
+    const newDetails = {
+      title: todoTitle,
+      description: todoDescription,
+      dueDate: todoDueDate,
+      priority: todoPriority
+    };
+
+    activeProject.updateTodo(editingId, newDetails);
+    dom.setHiddenTodoInput('');
+  } else {
     const todo = new Todo(todoTitle, todoDescription, todoDueDate, todoPriority);
     activeProject.addTodo(todo);
-    updateDisplay();
   }
 
+  updateDisplay();
   todoForm.reset();
 }
 
@@ -106,6 +130,15 @@ const toggleTodoDone = (todoId) => {
   dom.toggleTodoDoneClass(todoId, todo);
 }
 
+const editTodoDetails = (e, todoId) => {
+  const activeProject = projectManager.getActiveProject();
+  const todo = activeProject.findTodoById(todoId);
+
+  dom.setHiddenTodoInput(todoId);
+  dom.populateTodoForm(todo);
+  showDialogElement(e);
+}
+
 const handleTodoClick = (e) => {
   if (e.target.classList.contains('todo-container')) return;
   const todoCard = e.target.closest('.todo-card');
@@ -113,6 +146,7 @@ const handleTodoClick = (e) => {
 
   const todoCardTargets = {
     'todo-checkbox': () => toggleTodoDone(todoId),
+    'edit-todo-btn': () => editTodoDetails(e, todoId),
   }
 
   const matchingClassKey = dom.findMatchingClassKey(e, todoCardTargets);
