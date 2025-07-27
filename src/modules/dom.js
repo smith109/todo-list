@@ -63,7 +63,7 @@ const toggleTodoDetails = (todoId) => {
 const populateTodoForm = (todo) => {
   todoForm['todo-title'].value = todo.title;
   todoForm['todo-description'].value = todo.description;
-  todoForm['todo-due-date'].value = format(todo.dueDate, 'yyyy-MM-dd');
+  todoForm['todo-due-date'].value = todo.dueDate;
   todoForm['todo-priority'].value = todo.priority;
 }
 
@@ -96,6 +96,7 @@ const createTodoHeader = (todo) => {
   const titleH3 = document.createElement('h3');
   const prioritySpan = document.createElement('span');
   const dueDateSpan = document.createElement('span');
+  const formattedDate = format(todo.dueDate.replace('-', '/'), 'MM/dd/yyyy');
 
   header.classList.add('header');
   checkboxInput.classList.add('todo-checkbox');
@@ -107,8 +108,7 @@ const createTodoHeader = (todo) => {
 
   titleH3.textContent = todo.title;
   prioritySpan.textContent = `${todo.priority} Priority`;
-  dueDateSpan.textContent = todo.dueDate ? 
-  `Due: ${format(todo.dueDate, 'MMM do, yyy')}` : '';
+  dueDateSpan.textContent = todo.dueDate ? `Due: ${formattedDate}` : '';
 
   checkboxLabel.append(checkboxInput);
   todoSummaryDiv.append(titleH3, prioritySpan);
