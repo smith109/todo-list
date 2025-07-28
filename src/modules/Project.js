@@ -30,4 +30,11 @@ export default class Project {
     const todoToEdit = this.findTodoById(id);
     Object.assign(todoToEdit, newDetails);
   }
+
+  toJSON() {
+    return {
+      name: this.name,
+      todos: this.#todos
+    };
+  }
 }
