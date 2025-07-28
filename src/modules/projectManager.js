@@ -25,6 +25,10 @@ const findProjectById = (id) => {
   return projects.find((project) => project.getId() === id);
 }
 
+const toJSON = () => {
+  return { projects };
+}
+
 export default {
   getProjects,
   getActiveProject,
@@ -32,5 +36,6 @@ export default {
   resetActiveProject,
   addProject,
   removeProject,
-  findProjectById
-}
+  findProjectById,
+  toJSON,
+};
