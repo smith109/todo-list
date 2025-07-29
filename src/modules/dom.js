@@ -76,23 +76,27 @@ const populateTodoForm = (todo) => {
   todoForm['todo-priority'].value = todo.priority;
 }
 
-const createProjectElement = (project) => {
+const createProjectElement = (project, index) => {
   const projectElement = document.createElement('li');
   const projectNameSpan = document.createElement('span');
-  const deleteBtn = document.createElement('button');
 
   projectElement.dataset.id = project.getId();
   projectNameSpan.textContent = project.name;
+  projectElement.append(projectNameSpan);
 
-  projectElement.append(projectNameSpan, deleteBtn);
+  if (index !== 0) {
+    const deleteBtn = document.createElement('button');
+    projectElement.append(deleteBtn);
+  }
+
   return projectElement;
 }
 
 const renderProjects = (projectArr) => {
   projectContainer.replaceChildren();
 
-  projectArr.forEach((project) => {
-    const projectElement = createProjectElement(project);
+  projectArr.forEach((project, index) => {
+    const projectElement = createProjectElement(project, index);
     projectContainer.append(projectElement);
   });
 }
