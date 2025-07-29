@@ -187,13 +187,16 @@ const restore = (data) => {
   projectStore.forEach(({ name, todos }) => {
     const project = new Project(name);
 
-    todos.forEach(({ title, description, dueDate, priority, done }) => {
-      const todo = new Todo(title, description, dueDate, priority, done);
-      project.addTodo(todo);
-    });
+    todos.filter((todo) => todo.done !== true)
+      .forEach(({ title, description, dueDate, priority }) => {
+        const todo = new Todo(title, description, dueDate, priority);
+        project.addTodo(todo);
+      });
 
     projectManager.addProject(project);
   });
+
+  storage.save(projectManager);
 }
 
 const loadApp = () => {
