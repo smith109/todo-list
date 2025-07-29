@@ -154,15 +154,26 @@ const createTodoDetails = (todo) => {
   return todoDetails;
 }
 
+const resetTodoCardState = (todoElement) => {
+  todoElement.classList.add('done');
+  todoElement.querySelector('.todo-checkbox').checked = true;
+}
+
 const createTodoElement = (todo) => {
   const todoElement = document.createElement('div');
   const header = createTodoHeader(todo);
   const details = createTodoDetails(todo);
+  const isDone = todo.isDone();
 
   todoElement.dataset.id = todo.getId();
   todoElement.classList.add('todo-card');
 
   todoElement.append(header, details);
+
+  if (isDone) {
+    resetTodoCardState(todoElement);
+  }
+
   return todoElement;
 }
 
