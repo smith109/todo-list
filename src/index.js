@@ -1,4 +1,5 @@
 import projectManager from './modules/projectManager';
+import storage from './modules/storage';
 import Project from './modules/Project';
 import Todo from './modules/Todo';
 import dom from './modules/dom';
@@ -49,12 +50,22 @@ const showDialogElement = (e) => {
   }
 }
 
+const closeDialogElement = (e) => {
+  if (!e.target.classList.contains('cancel-btn')) return;
+  const dialog = e.target.closest('dialog');
+  const form = e.target.closest('form');
+
+  dialog.close();
+  form.reset();
+}
+
 const submitProjectForm = () => {
   const projectName = projectForm['project-name'].value.trim();
 
   if (projectName !== '') {
     const project = new Project(projectName);
     projectManager.addProject(project);
+    storage.save(projectManager);
     updateDisplay();
   }
 
@@ -93,6 +104,7 @@ const submitTodoForm = () => {
     activeProject.addTodo(todo);
   }
 
+  storage.save(projectManager);
   updateDisplay();
   todoForm.reset();
 }
@@ -102,6 +114,7 @@ const removeProject = (selectedProject) => {
   const isActive = (selectedProject === activeProject);
 
   projectManager.removeProject(selectedProject);
+  storage.save(projectManager);
 
   if (isActive) {
     projectManager.resetActiveProject();
@@ -127,6 +140,7 @@ const toggleTodoDone = (todoId) => {
   const todo = activeProject.findTodoById(todoId);
 
   todo.toggleDone();
+  storage.save(projectManager);
   dom.toggleTodoDoneClass(todoId, todo);
 }
 
@@ -143,6 +157,7 @@ const deleteTodo = (todoId) => {
   const activeProject = projectManager.getActiveProject();
 
   activeProject.removeTodo(todoId);
+  storage.save(projectManager);
   updateDisplay();
 }
 
@@ -166,13 +181,33 @@ const handleTodoClick = (e) => {
   }
 }
 
-function closeDialogElement(e) {
-  if (!e.target.classList.contains('cancel-btn')) return;
-  const dialog = e.target.closest('dialog');
-  const form = e.target.closest('form');
+const restore = (data) => {
+  const projectStore = data.projects;
 
-  dialog.close();
-  form.reset();
+  projectStore.forEach(({ name, todos }) => {
+    const project = new Project(name);
+
+    todos.forEach(({ title, description, dueDate, priority, done }) => {
+      const todo = new Todo(title, description, dueDate, priority, done);
+      project.addTodo(todo);
+    });
+
+    projectManager.addProject(project);
+  });
+}
+
+const loadApp = () => {
+  const data = storage.load();
+
+  if (!data) {
+    projectManager.addProject(new Project());
+    storage.save(projectManager);
+  } else {
+    restore(data);
+  }
+
+  projectManager.resetActiveProject();
+  updateDisplay();
 }
 
 projectContainer.addEventListener('click', handleProjectClick);
@@ -183,3 +218,5 @@ todoContainer.addEventListener('click', handleTodoClick);
 addTodoBtn.addEventListener('click', showDialogElement);
 todoModal.addEventListener('click', closeDialogElement);
 todoForm.addEventListener('submit', submitTodoForm);
+
+loadApp();
