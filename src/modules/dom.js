@@ -5,6 +5,11 @@ const projectContainer = document.querySelector('.project-container');
 const todoContainer = document.querySelector('.todo-container');
 const todoForm = document.querySelector('.todo-form');
 
+const getFormattedDate = (todo) => {
+  return todo.dueDate ?
+    format(todo.dueDate.replace('-', '/'), 'MM/dd/yyyy') : '';
+}
+
 const renderActiveProjectName = (activeProject) => {
   if (activeProject) {
     activeProjectName.textContent = activeProject.name;
@@ -109,7 +114,7 @@ const createTodoHeader = (todo) => {
   const titleH3 = document.createElement('h3');
   const prioritySpan = document.createElement('span');
   const dueDateSpan = document.createElement('span');
-  const formattedDate = format(todo.dueDate.replace('-', '/'), 'MM/dd/yyyy');
+  const formattedDate = getFormattedDate(todo);
 
   header.classList.add('header');
   checkboxInput.classList.add('todo-checkbox');
