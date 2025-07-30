@@ -1,8 +1,11 @@
 :root {
   --clr-accent: #3498db;
   --clr-main-bg: #f4f4f4;
-  --clr-edit-btn: #FFB300;
+  --clr-edit-btn: #ffb300;
+  --clr-dialog-bg: #f9f9f9;
   --clr-delete-btn: #f02323;
+  --clr-cancel-btn: #f13c18;
+  --clr-submit-btn: #3498db;
   --clr-sidebar-bg: #444444;
   --clr-neutral-lt: #edf4f2;
   --clr-neutral-ltr: #ffffff;
@@ -280,4 +283,109 @@ button.delete-todo-btn {
 
 .todo-card .details.hidden {
   display: none;
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+dialog {
+  margin: auto;
+  outline: none;
+  padding: 1.25rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: var(--clr-dialog-bg);
+}
+
+dialog form {
+  width: 20rem;
+  padding: 1.25rem;
+}
+
+dialog form>h2 {
+  text-align: center;
+}
+
+form>.form-row {
+  margin: 0.7rem 0;
+}
+
+.form-row>label,
+fieldset legend {
+  display: block;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.form-row>input,
+.form-row>textarea,
+fieldset {
+  width: 100%;
+  outline: none;
+  border-radius: 6px;
+  padding: 0.2rem 0.7rem;
+  border: 2px solid #ddd;
+}
+
+.form-row>input:focus,
+.form-row>textarea:focus {
+  border: 2px solid var(--clr-accent);
+}
+
+.form-row>input[type='text']:valid {
+  border: 2px solid var(--clr-low-priority-txt);
+}
+
+.form-row:has(span) {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+input+span {
+  position: relative;
+}
+
+input:required+span::after {
+  top: -32px;
+  right: 0px;
+  color: #f44336;
+  font-weight: 600;
+  position: absolute;
+  border-radius: 4px;
+  content: 'Required';
+  background: #ffebee;
+  padding: 0.10rem 0.4rem;
+}
+
+.form-row textarea {
+  resize: none;
+}
+
+fieldset {
+  gap: 16px;
+  display: flex;
+  padding-bottom: 1rem;
+  justify-content: space-evenly;
+}
+
+fieldset label {
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.form-row button {
+  margin-top: 0.4rem;
+  margin-right: 0.4rem;
+  padding: 0.4rem 0.8rem;
+}
+
+.form-row>.cancel-btn {
+  background: var(--clr-cancel-btn);
+}
+
+.form-row>.cancel-btn+button {
+  background: var(--clr-submit-btn);
 }
