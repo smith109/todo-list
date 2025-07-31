@@ -137,6 +137,7 @@ div.container {
   font-size: 1.2rem;
   border-radius: 5px;
   align-items: center;
+  margin-bottom: 0.5rem;
   justify-content: space-between;
 }
 
@@ -148,6 +149,11 @@ div.container {
 
 .sidebar li:hover {
   background: #ffffff1a;
+}
+
+.sidebar li>span {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sidebar li>button::before {
