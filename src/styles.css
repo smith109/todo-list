@@ -3,7 +3,7 @@
   --clr-main-bg: #f4f4f4;
   --clr-edit-btn: #ffb300;
   --clr-dialog-bg: #f9f9f9;
-  --clr-delete-btn: #f02323;
+  --clr-delete-btn: #f44336;
   --clr-cancel-btn: #f13c18;
   --clr-submit-btn: #3498db;
   --clr-sidebar-bg: #444444;
@@ -38,6 +38,23 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+h1,
+h2,
+h3,
+p {
+  overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
 ul {
   padding: 0;
   list-style: none;
@@ -55,7 +72,7 @@ button {
   cursor: pointer;
   font-weight: 600;
   border-radius: 5px;
-  color: var(--clr-neutral-lt);
+  color: var(--clr-neutral-ltr);
 }
 
 button:hover {
@@ -164,7 +181,19 @@ div.container {
   cursor: pointer;
   border-radius: 8px;
   margin-bottom: 1rem;
+  border: 1px solid #ddd;
   background: var(--clr-neutral-ltr);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.todo-container>.todo-card:hover {
+  background: #f6f8fa;
+}
+
+.todo-container>.todo-card.done {
+  color: #777777;
+  background: #e0e0e0;
+  text-decoration: line-through;
 }
 
 .todo-card>.header {
@@ -259,6 +288,11 @@ label>input[type='checkbox']:focus {
 
 .todo-card .details {
   display: flex;
+  padding: 1.25rem;
+  border-radius: 5px;
+  margin-top: 1.25rem;
+  border: 1px solid #ddd;
+  background: var(--clr-neutral-ltr);
 }
 
 .todo-card .details>p {
