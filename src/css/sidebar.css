@@ -1,0 +1,68 @@
+div.sidebar {
+  width: 270px;
+  height: 100dvh;
+  padding: 25px 16px;
+  color: var(--clr-secondary-text);
+  background-color: var(--clr-sidebar-bg);
+}
+
+.sidebar > div:nth-child(-n + 2) {
+  margin-bottom: 30px;
+}
+
+.sidebar > .branding {
+  gap: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.branding > .icon {
+  display: flex;
+  flex-shrink: 0;
+  padding: 0.2rem;
+  border-radius: 50%;
+  background-color:var(--clr-accent-lt);
+}
+
+.branding h1 {
+  font-weight: 500;
+  font-size: 1.8rem;
+}
+
+.btn-container > .add-project-btn {
+  width: 100%;
+  padding: 12px;
+  color: var(--clr-secondary-text);
+  background-color: var(--clr-accent-lt);
+}
+
+.btn-container > .add-project-btn:hover {
+  transform: translateY(1px);
+  color: var(--clr-secondary-text);
+  background-color: var(--clr-accent-dk);
+}
+
+.btn-container > .add-project-btn:active {
+  transform: translateY(2px);
+}
+
+.projects h2 {
+  font-size: 1rem;
+  color: #a1a1a1;
+  margin-bottom: 10px;
+  letter-spacing: 1.2px;
+}
+
+.project-list > li {
+  cursor: pointer;
+  color: #71717a;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  padding: 10px 12px;
+}
+
+.project-list > li:hover {
+  font-weight: 700;
+  background-color: #27272a;
+  color: var(--clr-secondary-text);
+}

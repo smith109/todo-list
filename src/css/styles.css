@@ -1,3 +1,22 @@
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../assets/fonts/NotoSans-Regular.woff2') format('woff2'),
+        url('../assets/fonts/NotoSans-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+  --clr-accent-lt: #f43f5e;
+  --clr-accent-dk: #e11d48;
+  --clr-primary-bg: #f8fafc;
+  --clr-sidebar-bg: #18181b;
+  --clr-primary-text: #171923;
+  --clr-secondary-text: #fafafa;
+  --ff-primary-text: 'Noto Sans', sans-serif;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -8,6 +27,9 @@
 
 body {
   line-height: 1.5;
+  color: var(--clr-primary-text);
+  font-family: var(--ff-primary-text);
+  background-color: var(--clr-primary-bg);
 }
 
 img {
@@ -17,4 +39,16 @@ img {
 
 input, button, textarea {
   font: inherit;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
 }
