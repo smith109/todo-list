@@ -1,5 +1,6 @@
 const projectList = document.querySelector('.project-list');
 const todoCards = document.querySelector('.todo-cards');
+import '../css/main-content.css';
 import '../css/sidebar.css';
 
 function createProjectItem(project) {
