@@ -1,1 +1,1 @@
-import './css/styles.css';
+import './modules/domController.js';
