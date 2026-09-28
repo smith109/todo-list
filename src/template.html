@@ -15,7 +15,7 @@
           <h1>Todo List</h1>
         </div>
         <div class="btn-container">
-          <button class="add-project-btn">Add Project</button>
+          <button class="add-project-btn" data-modal-btn="projectModalBtn">Add Project</button>
         </div>
         <div class="projects">
           <h2>My Projects</h2>
@@ -34,5 +34,22 @@
         </div>
       </div>
     </div>
+    <dialog class="project-modal">
+      <div class="header">
+        <h2>Add New Project</h2>
+        <button class="close-btn" data-action="closeModal">&#x2715;</button>
+      </div>
+      <form method="dialog" class="project-form">
+        <div class="form-group">
+          <label for="project-name">Project Name:</label>
+          <input type="text" name="project-name" id="project-name" autofocus required>
+          <span class="required-text"></span>
+        </div>
+        <div class="form-group">
+          <button class="close-btn" type="button" data-action="closeModal">Cancel</button>
+          <button type="submit" data-action="submitForm">Save Project</button>
+        </div>
+      </form>
+    </dialog>
   </body>
 </html>
