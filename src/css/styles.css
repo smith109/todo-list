@@ -46,9 +46,46 @@ button {
   cursor: pointer;
   font-weight: 600;
   border-radius: 8px;
+  padding: 8px 12px;
+}
+
+button:hover {
+  transform: translateY(1px);
+}
+
+button:active {
+  transform: translateY(2px);
 }
 
 ul {
   padding: 0;
   list-style: none;
+}
+
+div.container {
+  display: grid;
+  min-height: 100dvh;
+  grid-template-columns: 1fr 4fr;
+}
+
+.btn-container > .add-project-btn::before,
+.btn-container > .add-todo-btn::before {
+  content: '\002b';
+}
+
+.btn-container > .add-project-btn,
+.btn-container > .add-todo-btn {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-secondary-text);
+  background-color: var(--clr-accent-lt);
+}
+
+.btn-container > .add-project-btn:hover,
+.btn-container > .add-todo-btn:hover {
+  color: var(--clr-secondary-text);
+  background-color: var(--clr-accent-dk);
 }

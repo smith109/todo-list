@@ -1,0 +1,127 @@
+.main-content > .todos {
+  margin: 0 auto;
+  max-width: 1100px;
+  padding: calc(1rem + 0.5vw);
+}
+
+.todos > .header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+}
+
+.header > .active-project {
+  font-size: 1.8rem;
+}
+
+.todo-cards > .card {
+  cursor: pointer;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  background-color: #ffffff;
+  border: 2px solid #dddddd;
+  padding: calc(1rem + 0.5vw);
+  box-shadow: 3px 3px 8px rgba(24, 24, 27, 0.1);
+}
+
+.todo-cards > .card:hover {
+  border-color: #a1a1a1;
+}
+
+.card > .header {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 0.6rem;
+  align-items: flex-start;
+}
+
+.header > label {
+  font-size: 1.2rem;
+}
+
+label > input[type='checkbox']::before {
+  content: '';
+  width: 1em;
+  height: 1em;
+  transform: scale(0);
+  background-color: CanvasText;
+  box-shadow: inset 1em 1em #07b23e;
+  transition: 120ms transform ease-in-out;
+  clip-path: polygon(28% 38%, 41% 53%, 78.6% 20.41%, 90.55% 34.19%, 40% 78%, 15% 50%);
+}
+
+label > input[type='checkbox']:checked::before {
+  transform: scale(1);
+  transform-origin: left;
+}
+
+label > input[type='checkbox'] {
+  width: 1.3em;
+  height: 1.3em;
+  display: grid;
+  cursor: pointer;
+  margin-top: 5px;
+  appearance: none;
+  border-radius: 50%;
+  color: currentColor;
+  place-content: center;
+  transform: translateY(-0.075em);
+  border: 0.15em solid currentColor;
+}
+
+label > input[type='checkbox']:focus {
+  outline-offset: max(2px, 0.15em);
+  outline: max(2px, 0.15em) solid currentColor;
+}
+
+.header > .summary {
+  flex: 1;
+  margin-bottom: 1.25rem;
+}
+
+.summary > h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+
+.summary > span {
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: capitalize;
+}
+
+.summary + span {
+  color: #545353;
+  font-size: 1.1rem;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.card > .details {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  padding: calc(1rem + 0.5rem);
+  border: 2px dotted #d9dbea;
+}
+
+.details > p {
+  flex: 1;
+  padding: 0.6rem;
+}
+
+.details > .btn-container {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.details button {
+  min-width: 72px;
+  padding: 0.3rem 0.65rem;
+}
+
+.details.hidden {
+  display: none;
+}
