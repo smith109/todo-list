@@ -7,12 +7,16 @@ const addProjectBtn = document.querySelector('.add-project-btn');
 const projectModal = document.querySelector('.project-modal');
 const projectForm = document.querySelector('.project-form');
 const projectManager = new ProjectManager();
+let activeProject = null;
 
 addProjectBtn.addEventListener('click', showDialogElement);
 projectForm.addEventListener('submit', submitProjectForm);
 
-function updateDisplay() {
-  renderProjectItems(projectManager.projects);
+const getActiveProject = () => activeProject;
+
+function setActiveProject(projectId) {
+  if (!projectId) return;
+  activeProject = projectManager.find(projectId);
 }
 
 function addProject(name) {
@@ -29,12 +33,6 @@ function submitProjectForm() {
   updateDisplay();
 }
 
-function getSelectedBtn(e) {
-  const button = e.target.closest('button');
-  const selectedButton = button.dataset.modalBtn;
-  return selectedButton;
-}
-
 function showDialogElement(e) {
   const selectedButton = getSelectedBtn(e)
   
@@ -45,4 +43,14 @@ function showDialogElement(e) {
   if (selectedButton) {
     modalBtns[selectedButton]();
   }
+}
+
+function getSelectedBtn(e) {
+  const button = e.target.closest('button');
+  const selectedButton = button.dataset.modalBtn;
+  return selectedButton;
+}
+
+function updateDisplay() {
+  renderProjectItems(projectManager.projects);
 }
