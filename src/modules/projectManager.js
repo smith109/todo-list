@@ -10,6 +10,10 @@ export class ProjectManager {
   }
 
   remove(id) {
+    const projectToRemove = this.find(id);
+    const isRemovable = projectToRemove.removable;
+    if (!isRemovable) return;
+
     this.#projects = this.#projects.filter((project) => project.id !== id);
   }
 
