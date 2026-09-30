@@ -5,10 +5,20 @@ import '../css/sidebar.css';
 
 function createProjectItem(project) {
   const projectItem = document.createElement('li');
+  const name = document.createElement('span');
+  const isRemovable = project.removable;
 
   projectItem.dataset.id = project.id;
-  projectItem.textContent = project.name;
   projectItem.classList.add('project-item');
+
+  name.textContent = project.name;
+  projectItem.append(name);
+
+  if (isRemovable) {
+    const deleteBtn = document.createElement('button');
+    deleteBtn.classList.add('delete-btn');
+    projectItem.append(deleteBtn);
+  }
 
   return projectItem;
 }
