@@ -47,11 +47,35 @@ div.sidebar {
   color: #71717a;
   border-radius: 8px;
   margin-bottom: 4px;
-  padding: 10px 12px;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .project-list > li:hover {
   font-weight: 700;
   background-color: #27272a;
   color: var(--clr-secondary-text);
+}
+
+li > span {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+li > button::before {
+  content: '\2715';
+}
+
+li > button {
+  flex-shrink: 0;
+  color: inherit;
+  background-color: transparent;
+}
+
+li > button:hover {
+  color: var(--clr-accent-lt);
 }
