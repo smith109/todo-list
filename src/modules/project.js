@@ -1,13 +1,19 @@
 export class Project {
   #id = crypto.randomUUID();
+  #removable = true;
   #todos = [];
 
-  constructor(name = 'Inbox') {
+  constructor(name = 'Untitled', isRemovable = true) {
     this.name = name;
+    this.#removable = isRemovable;
   }
 
   get id() {
     return this.#id;
+  }
+
+  get removable() {
+    return this.#removable;
   }
 
   get todos() {
@@ -24,5 +30,9 @@ export class Project {
 
   find(id) {
     return this.#todos.find((todo) => todo.id === id);
+  }
+
+  static createProtectedProject(name) {
+    return new Project(name, false);
   }
 }
