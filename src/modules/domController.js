@@ -10,6 +10,7 @@ const projectForm = document.querySelector('.project-form');
 const addTodoBtn = document.querySelector('.add-todo-btn');
 const todoModal = document.querySelector('.todo-modal');
 const todoForm = document.querySelector('.todo-form');
+const projectList = document.querySelector('.project-list');
 const projectManager = new ProjectManager();
 let activeProject = null;
 
@@ -17,17 +18,30 @@ addProjectBtn.addEventListener('click', showDialogElement);
 projectForm.addEventListener('submit', submitProjectForm);
 addTodoBtn.addEventListener('click', showDialogElement);
 todoForm.addEventListener('submit', submitTodoForm);
+projectList.addEventListener('click', handleProjectClick);
 
 const getActiveProject = () => activeProject;
 
-function setActiveProject(projectId) {
-  if (!projectId) return;
-  activeProject = projectManager.find(projectId);
+function setActiveProject(project) {
+  if (!project) return;
+  activeProject = projectManager.find(project.id);
+}
+
+function resetActiveProject() {
+  activeProject = projectManager.projects[0];
 }
 
 function addProject(name) {
   const project = new Project(name);
   projectManager.add(project);
+}
+
+function removeProject(projectToRemove) {
+  if (projectToRemove === getActiveProject()) {
+    resetActiveProject();
+  }
+
+  projectManager.remove(projectToRemove.id);
 }
 
 function addTodo(todoData = {}) {
@@ -75,6 +89,20 @@ function getSelectedBtn(e) {
   const button = e.target.closest('button');
   const selectedButton = button.dataset.modalBtn;
   return selectedButton;
+}
+
+function handleProjectClick(e) {
+  const projectElement = e.target.closest('[data-id]');
+  const projectId = projectElement?.dataset.id;
+  const project = projectManager.find(projectId);
+
+  if (e.target.classList.contains('delete-btn')) {
+    removeProject(project);
+  } else {
+    setActiveProject(project);
+  }
+ 
+  updateDisplay();
 }
 
 function updateDisplay() {
