@@ -15,8 +15,10 @@ const projectManager = new ProjectManager();
 let activeProject = null;
 
 addProjectBtn.addEventListener('click', showDialogElement);
+projectModal.addEventListener('click', closeDialogElement);
 projectForm.addEventListener('submit', submitProjectForm);
 addTodoBtn.addEventListener('click', showDialogElement);
+todoModal.addEventListener('click', closeDialogElement);
 todoForm.addEventListener('submit', submitTodoForm);
 projectList.addEventListener('click', handleProjectClick);
 
@@ -84,6 +86,15 @@ function showDialogElement(e) {
   if (selectedButton) {
     modalBtns[selectedButton]();
   }
+}
+
+function closeDialogElement(e) {
+  if (!e.target.classList.contains('close-btn')) return;
+  const dialog = e.target.closest('dialog');
+  const form = e.target.closest('form');
+
+  dialog.close();
+  form.reset();
 }
 
 function getSelectedBtn(e) {
