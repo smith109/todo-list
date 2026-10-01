@@ -1,4 +1,4 @@
-import { renderProjectItems, renderTodoCards } from './dom.js';
+import { renderProjectItems, renderTodoCards, renderActiveProject } from './dom.js';
 import { ProjectManager } from './projectManager.js';
 import { Project } from './project.js';
 import { Todo } from './todo.js';
@@ -28,7 +28,8 @@ function setActiveProject(project) {
 }
 
 function resetActiveProject() {
-  activeProject = projectManager.projects[0];
+  const projects = projectManager.projects;
+  setActiveProject(projects[0]);
 }
 
 function addProject(name) {
@@ -37,11 +38,11 @@ function addProject(name) {
 }
 
 function removeProject(projectToRemove) {
+  projectManager.remove(projectToRemove.id);
+
   if (projectToRemove === getActiveProject()) {
     resetActiveProject();
   }
-
-  projectManager.remove(projectToRemove.id);
 }
 
 function addTodo(todoData = {}) {
@@ -51,7 +52,7 @@ function addTodo(todoData = {}) {
 }
 
 function submitProjectForm() {
-  const inputs = projectForm.elements; 
+  const inputs = projectForm.elements;
   const projectName = inputs['project-name'].value.trim();
 
   addProject(projectName);
@@ -74,12 +75,12 @@ function submitTodoForm() {
 
 function showDialogElement(e) {
   const selectedButton = getSelectedBtn(e)
-  
+
   const modalBtns = {
     projectModalBtn: () => projectModal.showModal(),
     todoModalBtn: () => todoModal.showModal(),
-  }; 
-  
+  };
+
   if (selectedButton) {
     modalBtns[selectedButton]();
   }
@@ -101,7 +102,7 @@ function handleProjectClick(e) {
   } else {
     setActiveProject(project);
   }
- 
+
   updateDisplay();
 }
 
@@ -109,10 +110,11 @@ function updateDisplay() {
   const projects = projectManager.projects;
   const activeProject = getActiveProject();
 
+  renderProjectItems(projects);
+
   if (activeProject) {
     const todos = activeProject.todos;
     renderTodoCards(todos);
+    renderActiveProject(activeProject);
   }
-
-  renderProjectItems(projects);
 }
