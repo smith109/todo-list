@@ -118,3 +118,12 @@ function updateDisplay() {
     renderActiveProject(activeProject);
   }
 }
+
+function loadApp() {
+  const inbox = Project.createProtectedProject('Inbox');
+  projectManager.add(inbox);
+  resetActiveProject();
+  updateDisplay();
+}
+
+export { loadApp };
