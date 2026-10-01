@@ -45,17 +45,30 @@ div.sidebar {
 .project-list > li {
   cursor: pointer;
   color: #71717a;
-  border-radius: 8px;
-  margin-bottom: 4px;
+  border-radius: 2px;
+  margin-bottom: 0.5rem;
   padding: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-left: 3px solid transparent;
+}
+
+.project-list > li.active {
+  background-color: rgba(39, 39, 42, 0.5);
+  border-left: 3px solid var(--clr-accent-lt);
+}
+
+.project-list > li.active:hover {
+  border-left: 3px solid var(--clr-accent-dk);
 }
 
 .project-list > li:hover {
-  font-weight: 700;
   background-color: #27272a;
+  color: var(--clr-secondary-text);
+}
+
+li.active > span {
   color: var(--clr-secondary-text);
 }
 
