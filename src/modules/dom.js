@@ -1,5 +1,6 @@
 const projectList = document.querySelector('.project-list');
 const todoCards = document.querySelector('.todo-cards');
+const activeProjectEl = document.querySelector('.active-project');
 import '../css/main-content.css';
 import '../css/sidebar.css';
 
@@ -88,4 +89,17 @@ function renderTodoCards(todos = []) {
   });
 }
 
-export { renderProjectItems, renderTodoCards };
+function setActiveProject(project) {
+  const activeProject = document.querySelector('.active');
+  const projectItem = document.querySelector(`[data-id='${project.id}']`);
+
+  activeProject?.classList.remove('.active');
+  projectItem?.classList.add('active');
+}
+
+function renderActiveProject(project) {
+  activeProjectEl.textContent = project.name;
+  setActiveProject(project);
+}
+
+export { renderProjectItems, renderTodoCards, renderActiveProject };
