@@ -1,7 +1,7 @@
-import { renderProjectItems, renderTodoCards, renderActiveProject } from './dom.js';
 import { ProjectManager } from './projectManager.js';
 import { Project } from './project.js';
 import { Todo } from './todo.js';
+import * as dom from './dom.js';
 import '../css/styles.css';
 
 const addProjectBtn = document.querySelector('.add-project-btn');
@@ -11,6 +11,7 @@ const addTodoBtn = document.querySelector('.add-todo-btn');
 const todoModal = document.querySelector('.todo-modal');
 const todoForm = document.querySelector('.todo-form');
 const projectList = document.querySelector('.project-list');
+const todoCards = document.querySelector('.todo-cards');
 const projectManager = new ProjectManager();
 let activeProject = null;
 
@@ -21,6 +22,7 @@ addTodoBtn.addEventListener('click', showDialogElement);
 todoModal.addEventListener('click', closeDialogElement);
 todoForm.addEventListener('submit', submitTodoForm);
 projectList.addEventListener('click', handleProjectClick);
+todoCards.addEventListener('click', handleTodoClick);
 
 const getActiveProject = () => activeProject;
 
@@ -117,16 +119,32 @@ function handleProjectClick(e) {
   updateDisplay();
 }
 
+function handleTodoClick(e) {
+  const todoCard = e.target.closest('.card');
+  const todoId = todoCard?.dataset.id;
+  const todo = activeProject.find(todoId);
+  const selectedEl = e.target.closest('[data-action]');
+  const action = selectedEl?.dataset.action;
+
+  const todoActions = {
+    expand: () => dom.toggleDetailsElement(todo),
+  };
+
+  if (action) {
+    todoActions[action]();
+  }
+}
+
 function updateDisplay() {
   const projects = projectManager.projects;
   const activeProject = getActiveProject();
 
-  renderProjectItems(projects);
+  dom.renderProjectItems(projects);
 
   if (activeProject) {
     const todos = activeProject.todos;
-    renderTodoCards(todos);
-    renderActiveProject(activeProject);
+    dom.renderTodoCards(todos);
+    dom.renderActiveProject(activeProject);
   }
 }
 

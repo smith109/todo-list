@@ -119,4 +119,15 @@ function renderActiveProject(project) {
   setActiveProject(project);
 }
 
-export { renderProjectItems, renderTodoCards, renderActiveProject };
+function toggleDetailsElement(todo) {
+  const card = document.querySelector(`[data-id='${todo.id}']`);
+  const details = card.querySelector('.details');
+  details.classList.toggle('hidden');
+}
+
+export { 
+  renderProjectItems, 
+  renderTodoCards, 
+  renderActiveProject,
+  toggleDetailsElement,
+};
