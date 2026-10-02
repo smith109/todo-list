@@ -1,6 +1,7 @@
 const projectList = document.querySelector('.project-list');
 const todoCards = document.querySelector('.todo-cards');
 const activeProjectEl = document.querySelector('.active-project');
+import { format, parseISO } from 'date-fns';
 import '../css/main-content.css';
 import '../css/sidebar.css';
 
@@ -39,42 +40,53 @@ function createTodoCard(todo) {
   const checkboxLabel = document.createElement('label');
   const checkbox = document.createElement('input');
   const summary = document.createElement('div');
-  const title = document.createElement('h3');
-  const priority = document.createElement('span');
-  const dueDate = document.createElement('span');
+  const titleEl = document.createElement('h3');
+  const priorityEl = document.createElement('span');
+  const dueDateEl = document.createElement('span');
   const details = document.createElement('div');
-  const description = document.createElement('p');
+  const descriptionEl = document.createElement('p');
   const btnContainer = document.createElement('div');
   const editBtn = document.createElement('button');
   const deleteBtn = document.createElement('button');
-  const todoData = todo.data;
+  const { id, data } = todo;
+  const { title, description, dueDate, priority, done } = data;
 
-  todoCard.dataset.id = todo.id;
-  checkboxLabel.htmlFor = 'todo-done';
+  if (priority) {
+    priorityEl.classList.add(`${priority}-priority`);
+    priorityEl.textContent = `${priority} Priority`;
+  } 
+
+  if (dueDate) {
+    dueDateEl.textContent = 
+      `Due: ${format(parseISO(dueDate), 'MMM do, yyyy')}`;
+  }
+
+  if (done) {
+    todoCard.classList.add('done');
+  }
+
+  todoCard.dataset.id = id;
   checkbox.type = 'checkbox';
   checkbox.name = 'todo-done';
-  checkbox.id = 'todo-done';
 
   todoCard.classList.add('card');
   header.classList.add('header');
   summary.classList.add('summary');
-  details.classList.add('details');
+  details.classList.add('details', 'hidden');
   btnContainer.classList.add('btn-container');
   editBtn.classList.add('edit-btn');
   deleteBtn.classList.add('delete-btn');
 
-  title.textContent = todoData.title;
-  priority.textContent = todoData.priority;
-  dueDate.textContent = todoData.dueDate;
-  description.textContent = todoData.description;
+  titleEl.textContent = title;
+  descriptionEl.textContent = description || 'No description.';
   editBtn.textContent = 'Edit';
   deleteBtn.textContent = 'Delete';
 
   checkboxLabel.append(checkbox);
-  summary.append(title, priority);
-  header.append(checkboxLabel, summary, dueDate);
+  summary.append(titleEl, priorityEl);
+  header.append(checkboxLabel, summary, dueDateEl);
   btnContainer.append(editBtn, deleteBtn);
-  details.append(description, btnContainer);
+  details.append(descriptionEl, btnContainer);
   todoCard.append(header, details);
 
   return todoCard;
