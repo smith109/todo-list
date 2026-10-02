@@ -55,6 +55,12 @@ function addTodo(todoData = {}) {
   activeProject.add(todo);
 }
 
+function removeTodo(todoToRemove){
+  const activeProject = getActiveProject();
+  activeProject.remove(todoToRemove.id);
+  updateDisplay();
+}
+
 function toggleTodoDone(todo) {
   todo.toggle();
   dom.toggleDoneClass(todo);
@@ -134,6 +140,7 @@ function handleTodoClick(e) {
   const todoActions = {
     expand: () => dom.toggleDetailsElement(todo),
     toggle: () => toggleTodoDone(todo),
+    delete: () => removeTodo(todo),
   };
 
   if (action) {
