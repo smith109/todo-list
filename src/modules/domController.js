@@ -55,6 +55,11 @@ function addTodo(todoData = {}) {
   activeProject.add(todo);
 }
 
+function toggleTodoDone(todo) {
+  todo.toggle();
+  dom.toggleDoneClass(todo);
+}
+
 function submitProjectForm() {
   const inputs = projectForm.elements;
   const projectName = inputs['project-name'].value.trim();
@@ -128,6 +133,7 @@ function handleTodoClick(e) {
 
   const todoActions = {
     expand: () => dom.toggleDetailsElement(todo),
+    toggle: () => toggleTodoDone(todo),
   };
 
   if (action) {

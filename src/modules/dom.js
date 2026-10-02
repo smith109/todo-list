@@ -63,6 +63,7 @@ function createTodoCard(todo) {
 
   if (done) {
     todoCard.classList.add('done');
+    checkbox.checked = true;
   }
 
   todoCard.dataset.id = id;
@@ -125,9 +126,15 @@ function toggleDetailsElement(todo) {
   details.classList.toggle('hidden');
 }
 
+function toggleDoneClass(todo) {
+  const card = document.querySelector(`[data-id='${todo.id}']`);
+  card.classList.toggle('done');
+}
+
 export { 
   renderProjectItems, 
   renderTodoCards, 
   renderActiveProject,
   toggleDetailsElement,
+  toggleDoneClass,
 };
