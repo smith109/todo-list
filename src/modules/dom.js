@@ -66,6 +66,11 @@ function createTodoCard(todo) {
   }
 
   todoCard.dataset.id = id;
+  todoCard.dataset.action = 'expand';
+  checkbox.dataset.action = 'toggle';
+  editBtn.dataset.action = 'edit';
+  deleteBtn.dataset.action = 'delete';
+
   checkbox.type = 'checkbox';
   checkbox.name = 'todo-done';
 
