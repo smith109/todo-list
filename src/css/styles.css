@@ -211,11 +211,13 @@ fieldset > legend {
   margin-top: 0.4rem;
 }
 
-.form-group button[type='button'] {
+.form-group button[type='button'],
+.btn-container > .delete-btn {
   background-color: var(--clr-accent-lt);
 }
 
-.form-group button[type='button']:hover {
+.form-group button[type='button']:hover,
+.btn-container > .delete-btn:hover {
   background-color: var(--clr-accent-dk);
 }
 

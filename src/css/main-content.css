@@ -29,10 +29,15 @@
   border-color: #a1a1a1;
 }
 
+.todo-cards > .card.done {
+  color: #777777;
+  border-color: #e0e0e0;
+  background-color: #e0e0e0;
+}
+
 .card > .header {
   display: flex;
   gap: 12px;
-  margin-bottom: 0.6rem;
   align-items: flex-start;
 }
 
@@ -91,6 +96,18 @@ label > input[type='checkbox']:focus {
   text-transform: capitalize;
 }
 
+.summary > span.low-priority {
+  color: #059669;
+}
+
+.summary > span.medium-priority {
+  color: #ffb300;
+}
+
+.summary > span.high-priority {
+  color: #ef4444;
+}
+
 .summary + span {
   color: #545353;
   font-size: 1.1rem;
@@ -101,6 +118,7 @@ label > input[type='checkbox']:focus {
 .card > .details {
   display: flex;
   gap: 32px;
+  margin-top: 0.6rem;
   align-items: center;
   padding: calc(1rem + 0.5rem);
   border: 2px dotted #d9dbea;
@@ -111,15 +129,23 @@ label > input[type='checkbox']:focus {
   padding: 0.6rem;
 }
 
+.details button {
+  min-width: 72px;
+  padding: 0.3rem 0.65rem;
+}
+
 .details > .btn-container {
   display: flex;
   gap: 10px;
   margin-left: auto;
 }
 
-.details button {
-  min-width: 72px;
-  padding: 0.3rem 0.65rem;
+.btn-container > .edit-btn {
+  background-color: #ffbc49;
+}
+
+.btn-container > .edit-btn:hover {
+  background-color: #ffb300;
 }
 
 .details.hidden {
