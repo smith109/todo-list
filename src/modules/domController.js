@@ -55,7 +55,7 @@ function addTodo(todoData = {}) {
   activeProject.add(todo);
 }
 
-function removeTodo(todoToRemove){
+function removeTodo(todoToRemove) {
   const activeProject = getActiveProject();
   activeProject.remove(todoToRemove.id);
   updateDisplay();
@@ -64,6 +64,17 @@ function removeTodo(todoToRemove){
 function toggleTodoDone(todo) {
   todo.toggle();
   dom.toggleDoneClass(todo);
+}
+
+function showEditTodoModal(todo) {
+  dom.populateTodoForm(todo);
+  showTodoModal('Edit Task');
+}
+
+function updateTodo(id, newData = {}) {
+  const activeProject = getActiveProject();
+  const todo = activeProject.find(id);
+  todo.update(newData);
 }
 
 function submitProjectForm() {
@@ -81,11 +92,24 @@ function submitTodoForm() {
   const description = inputs['todo-description'].value.trim();
   const dueDate = inputs['todo-due-date'].value;
   const priority = inputs['todo-priority'].value;
+  const id = inputs['todoId'].value;
   const todoData = { title, description, dueDate, priority };
 
-  addTodo(todoData);
+  if (id) {
+    const newData = { title, description, dueDate, priority }; 
+    updateTodo(id, newData);
+    inputs['todoId'].value = '';
+  } else {
+    addTodo(todoData);
+  }
+
   todoForm.reset();
   updateDisplay();
+}
+
+function showTodoModal(formTitle) {
+  dom.renderTodoFormTitle(formTitle);
+  todoModal.showModal();
 }
 
 function showDialogElement(e) {
@@ -93,7 +117,7 @@ function showDialogElement(e) {
 
   const modalBtns = {
     projectModalBtn: () => projectModal.showModal(),
-    todoModalBtn: () => todoModal.showModal(),
+    todoModalBtn: () => showTodoModal('Add New Task'),
   };
 
   if (selectedButton) {
@@ -138,13 +162,14 @@ function handleTodoClick(e) {
   const action = selectedEl?.dataset.action;
 
   const todoActions = {
-    expand: () => dom.toggleDetailsElement(todo),
-    toggle: () => toggleTodoDone(todo),
-    delete: () => removeTodo(todo),
+    expand: dom.toggleDetailsElement,
+    toggle: toggleTodoDone,
+    delete: removeTodo,
+    edit: showEditTodoModal,
   };
 
   if (action) {
-    todoActions[action]();
+    todoActions[action](todo);
   }
 }
 

@@ -137,6 +137,19 @@ function toggleDoneClass(todo) {
   card.classList.toggle('done');
 }
 
+function populateTodoForm(todo) {
+  const { id, data } = todo;
+  const { title, description, dueDate, priority } = data;
+  const todoForm = document.querySelector('.todo-form');
+  const inputs = todoForm.elements;
+
+  inputs['todoId'].value = id;
+  inputs['todo-title'].value = title;
+  inputs['todo-description'].value = description;
+  inputs['todo-due-date'].value = dueDate;
+  inputs['todo-priority'].value = priority;
+}
+
 export { 
   renderProjectItems, 
   renderTodoCards, 
@@ -144,4 +157,5 @@ export {
   renderTodoFormTitle,
   toggleDetailsElement,
   toggleDoneClass,
+  populateTodoForm,
 };
