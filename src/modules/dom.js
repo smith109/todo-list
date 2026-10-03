@@ -120,6 +120,12 @@ function renderActiveProject(project) {
   setActiveProject(project);
 }
 
+function renderTodoFormTitle(title) {
+  const todoForm = document.querySelector('.todo-form');
+  const formTitle = todoForm.querySelector('h2');
+  formTitle.textContent = title;
+}
+
 function toggleDetailsElement(todo) {
   const card = document.querySelector(`[data-id='${todo.id}']`);
   const details = card.querySelector('.details');
@@ -135,6 +141,7 @@ export {
   renderProjectItems, 
   renderTodoCards, 
   renderActiveProject,
+  renderTodoFormTitle,
   toggleDetailsElement,
   toggleDoneClass,
 };
