@@ -29,4 +29,8 @@ export class Todo {
   update(newData = {}) {
     this.#data = { ...this.#data, ...newData };
   }
+
+  toJSON() {
+    return this.#data;
+  }
 }

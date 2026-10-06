@@ -20,4 +20,8 @@ export class ProjectManager {
   find(id) {
     return this.#projects.find((project) => project.id === id);
   }
+
+  toJSON() {
+    return this.#projects;
+  }
 }

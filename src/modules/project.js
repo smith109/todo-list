@@ -32,6 +32,14 @@ export class Project {
     return this.#todos.find((todo) => todo.id === id);
   }
 
+  toJSON() {
+    return {
+      name: this.name,
+      todos: this.todos,
+      isRemovable: this.#removable,
+    };
+  }
+
   static createProtectedProject(name) {
     return new Project(name, false);
   }
