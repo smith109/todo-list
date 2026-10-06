@@ -1,3 +1,4 @@
+import { storeAppData, loadAppData } from './storage.js';
 import { ProjectManager } from './projectManager.js';
 import { Project } from './project.js';
 import { Todo } from './todo.js';
@@ -39,10 +40,12 @@ function resetActiveProject() {
 function addProject(name) {
   const project = new Project(name);
   projectManager.add(project);
+  storeAppData(projectManager);
 }
 
 function removeProject(projectToRemove) {
   projectManager.remove(projectToRemove.id);
+  storeAppData(projectManager);
 
   if (projectToRemove === getActiveProject()) {
     resetActiveProject();
@@ -53,17 +56,20 @@ function addTodo(todoData = {}) {
   const activeProject = getActiveProject();
   const todo = new Todo(todoData);
   activeProject.add(todo);
+  storeAppData(projectManager);
 }
 
 function removeTodo(todoToRemove) {
   const activeProject = getActiveProject();
   activeProject.remove(todoToRemove.id);
+  storeAppData(projectManager);
   updateDisplay();
 }
 
 function toggleTodoDone(todo) {
   todo.toggle();
   dom.toggleDoneClass(todo);
+  storeAppData(projectManager);
 }
 
 function showEditTodoModal(todo) {
@@ -75,6 +81,7 @@ function updateTodo(id, newData = {}) {
   const activeProject = getActiveProject();
   const todo = activeProject.find(id);
   todo.update(newData);
+  storeAppData(projectManager);
 }
 
 function submitProjectForm() {
@@ -96,7 +103,7 @@ function submitTodoForm() {
   const todoData = { title, description, dueDate, priority };
 
   if (id) {
-    const newData = { title, description, dueDate, priority }; 
+    const newData = { title, description, dueDate, priority };
     updateTodo(id, newData);
     inputs['todoId'].value = '';
   } else {
@@ -186,9 +193,34 @@ function updateDisplay() {
   }
 }
 
+function restoreAppData(data = []) {
+  data.forEach(({ isRemovable, name, todos }) => {
+    const project = (!isRemovable)
+      ? Project.createProtectedProject(name)
+      : new Project(name);
+
+    for (const todo of todos) {
+      if (!todo.done) {
+        const todoItem = new Todo(todo);
+        project.add(todoItem);
+      }
+    }
+
+    projectManager.add(project);
+  });
+}
+
 function loadApp() {
-  const inbox = Project.createProtectedProject('Inbox');
-  projectManager.add(inbox);
+  const data = loadAppData();
+
+  if (!data) {
+    const inbox = Project.createProtectedProject('Inbox');
+    projectManager.add(inbox);
+    storeAppData(projectManager);
+  } else {
+    restoreAppData(data);
+  }
+
   resetActiveProject();
   updateDisplay();
 }
