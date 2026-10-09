@@ -1,29 +1,29 @@
-import { storeAppData, loadAppData } from './storage.js';
-import { ProjectManager } from './projectManager.js';
-import { Project } from './project.js';
-import { Todo } from './todo.js';
-import * as dom from './dom.js';
-import '../css/styles.css';
+import { storeAppData, loadAppData } from "./storage.js";
+import { ProjectManager } from "./projectManager.js";
+import { Project } from "./project.js";
+import { Todo } from "./todo.js";
+import * as dom from "./dom.js";
+import "../css/styles.css";
 
-const addProjectBtn = document.querySelector('.add-project-btn');
-const projectModal = document.querySelector('.project-modal');
-const projectForm = document.querySelector('.project-form');
-const addTodoBtn = document.querySelector('.add-todo-btn');
-const todoModal = document.querySelector('.todo-modal');
-const todoForm = document.querySelector('.todo-form');
-const projectList = document.querySelector('.project-list');
-const todoCards = document.querySelector('.todo-cards');
+const addProjectBtn = document.querySelector(".add-project-btn");
+const projectModal = document.querySelector(".project-modal");
+const projectForm = document.querySelector(".project-form");
+const addTodoBtn = document.querySelector(".add-todo-btn");
+const todoModal = document.querySelector(".todo-modal");
+const todoForm = document.querySelector(".todo-form");
+const projectList = document.querySelector(".project-list");
+const todoCards = document.querySelector(".todo-cards");
 const projectManager = new ProjectManager();
 let activeProject = null;
 
-addProjectBtn.addEventListener('click', showDialogElement);
-projectModal.addEventListener('click', closeDialogElement);
-projectForm.addEventListener('submit', submitProjectForm);
-addTodoBtn.addEventListener('click', showDialogElement);
-todoModal.addEventListener('click', closeDialogElement);
-todoForm.addEventListener('submit', submitTodoForm);
-projectList.addEventListener('click', handleProjectClick);
-todoCards.addEventListener('click', handleTodoClick);
+addProjectBtn.addEventListener("click", showDialogElement);
+projectModal.addEventListener("click", closeDialogElement);
+projectForm.addEventListener("submit", submitProjectForm);
+addTodoBtn.addEventListener("click", showDialogElement);
+todoModal.addEventListener("click", closeDialogElement);
+todoForm.addEventListener("submit", submitTodoForm);
+projectList.addEventListener("click", handleProjectClick);
+todoCards.addEventListener("click", handleTodoClick);
 
 const getActiveProject = () => activeProject;
 
@@ -74,7 +74,7 @@ function toggleTodoDone(todo) {
 
 function showEditTodoModal(todo) {
   dom.populateTodoForm(todo);
-  showTodoModal('Edit Task');
+  showTodoModal("Edit Task");
 }
 
 function updateTodo(id, newData = {}) {
@@ -86,7 +86,7 @@ function updateTodo(id, newData = {}) {
 
 function submitProjectForm() {
   const inputs = projectForm.elements;
-  const projectName = inputs['project-name'].value.trim();
+  const projectName = inputs["project-name"].value.trim();
 
   addProject(projectName);
   projectForm.reset();
@@ -95,17 +95,17 @@ function submitProjectForm() {
 
 function submitTodoForm() {
   const inputs = todoForm.elements;
-  const title = inputs['todo-title'].value.trim();
-  const description = inputs['todo-description'].value.trim();
-  const dueDate = inputs['todo-due-date'].value;
-  const priority = inputs['todo-priority'].value;
-  const id = inputs['todoId'].value;
+  const title = inputs["todo-title"].value.trim();
+  const description = inputs["todo-description"].value.trim();
+  const dueDate = inputs["todo-due-date"].value;
+  const priority = inputs["todo-priority"].value;
+  const id = inputs["todoId"].value;
   const todoData = { title, description, dueDate, priority };
 
   if (id) {
     const newData = { title, description, dueDate, priority };
     updateTodo(id, newData);
-    inputs['todoId'].value = '';
+    inputs["todoId"].value = "";
   } else {
     addTodo(todoData);
   }
@@ -120,11 +120,11 @@ function showTodoModal(formTitle) {
 }
 
 function showDialogElement(e) {
-  const selectedButton = getSelectedBtn(e)
+  const selectedButton = getSelectedBtn(e);
 
   const modalBtns = {
     projectModalBtn: () => projectModal.showModal(),
-    todoModalBtn: () => showTodoModal('Add New Task'),
+    todoModalBtn: () => showTodoModal("Add New Task"),
   };
 
   if (selectedButton) {
@@ -133,26 +133,26 @@ function showDialogElement(e) {
 }
 
 function closeDialogElement(e) {
-  if (!e.target.classList.contains('close-btn')) return;
-  const dialog = e.target.closest('dialog');
-  const form = e.target.closest('form');
+  if (!e.target.classList.contains("close-btn")) return;
+  const dialog = e.target.closest("dialog");
+  const form = e.target.closest("form");
 
   dialog.close();
   form.reset();
 }
 
 function getSelectedBtn(e) {
-  const button = e.target.closest('button');
+  const button = e.target.closest("button");
   const selectedButton = button.dataset.modalBtn;
   return selectedButton;
 }
 
 function handleProjectClick(e) {
-  const projectElement = e.target.closest('[data-id]');
+  const projectElement = e.target.closest("[data-id]");
   const projectId = projectElement?.dataset.id;
   const project = projectManager.find(projectId);
 
-  if (e.target.classList.contains('delete-btn')) {
+  if (e.target.classList.contains("delete-btn")) {
     removeProject(project);
   } else {
     setActiveProject(project);
@@ -162,10 +162,10 @@ function handleProjectClick(e) {
 }
 
 function handleTodoClick(e) {
-  const todoCard = e.target.closest('.card');
+  const todoCard = e.target.closest(".card");
   const todoId = todoCard?.dataset.id;
   const todo = activeProject.find(todoId);
-  const selectedEl = e.target.closest('[data-action]');
+  const selectedEl = e.target.closest("[data-action]");
   const action = selectedEl?.dataset.action;
 
   const todoActions = {
@@ -195,7 +195,7 @@ function updateDisplay() {
 
 function restoreAppData(data = []) {
   data.forEach(({ isRemovable, name, todos }) => {
-    const project = (!isRemovable)
+    const project = !isRemovable
       ? Project.createProtectedProject(name)
       : new Project(name);
 
@@ -214,7 +214,23 @@ function loadApp() {
   const data = loadAppData();
 
   if (!data) {
-    const inbox = Project.createProtectedProject('Inbox');
+    const inbox = Project.createProtectedProject("Inbox");
+
+    const todo1 = new Todo({
+      title: "Wash the car",
+      description: "Don't forget to clean the floor mats!",
+      priority: "low",
+    });
+
+    const todo2 = new Todo({
+      title: "Go Shopping",
+      description: "Buy milk, eggs and bread",
+      dueDate: new Date().toISOString(),
+      priority: "medium",
+    });
+
+    inbox.add(todo1);
+    inbox.add(todo2);
     projectManager.add(inbox);
     storeAppData(projectManager);
   } else {
